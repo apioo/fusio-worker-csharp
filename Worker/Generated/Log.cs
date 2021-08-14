@@ -28,195 +28,198 @@ using Thrift.Processor;
 #pragma warning disable IDE0079  // remove unnecessary pragmas
 #pragma warning disable IDE1006  // parts of the code use IDL spelling
 
-
-public partial class Log : TBase
+namespace FusioWorker.Generated
 {
-  private string _level;
-  private string _message;
 
-  public string Level
+  public partial class Log : TBase
   {
-    get
-    {
-      return _level;
-    }
-    set
-    {
-      __isset.level = true;
-      this._level = value;
-    }
-  }
+    private string _level;
+    private string _message;
 
-  public string Message
-  {
-    get
+    public string Level
     {
-      return _message;
-    }
-    set
-    {
-      __isset.message = true;
-      this._message = value;
-    }
-  }
-
-
-  public Isset __isset;
-  public struct Isset
-  {
-    public bool level;
-    public bool message;
-  }
-
-  public Log()
-  {
-  }
-
-  public Log DeepCopy()
-  {
-    var tmp67 = new Log();
-    if((Level != null) && __isset.level)
-    {
-      tmp67.Level = this.Level;
-    }
-    tmp67.__isset.level = this.__isset.level;
-    if((Message != null) && __isset.message)
-    {
-      tmp67.Message = this.Message;
-    }
-    tmp67.__isset.message = this.__isset.message;
-    return tmp67;
-  }
-
-  public async global::System.Threading.Tasks.Task ReadAsync(TProtocol iprot, CancellationToken cancellationToken)
-  {
-    iprot.IncrementRecursionDepth();
-    try
-    {
-      TField field;
-      await iprot.ReadStructBeginAsync(cancellationToken);
-      while (true)
+      get
       {
-        field = await iprot.ReadFieldBeginAsync(cancellationToken);
-        if (field.Type == TType.Stop)
-        {
-          break;
-        }
-
-        switch (field.ID)
-        {
-          case 1:
-            if (field.Type == TType.String)
-            {
-              Level = await iprot.ReadStringAsync(cancellationToken);
-            }
-            else
-            {
-              await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
-            }
-            break;
-          case 2:
-            if (field.Type == TType.String)
-            {
-              Message = await iprot.ReadStringAsync(cancellationToken);
-            }
-            else
-            {
-              await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
-            }
-            break;
-          default: 
-            await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
-            break;
-        }
-
-        await iprot.ReadFieldEndAsync(cancellationToken);
+        return _level;
       }
-
-      await iprot.ReadStructEndAsync(cancellationToken);
+      set
+      {
+        __isset.level = true;
+        this._level = value;
+      }
     }
-    finally
-    {
-      iprot.DecrementRecursionDepth();
-    }
-  }
 
-  public async global::System.Threading.Tasks.Task WriteAsync(TProtocol oprot, CancellationToken cancellationToken)
-  {
-    oprot.IncrementRecursionDepth();
-    try
+    public string Message
     {
-      var struc = new TStruct("Log");
-      await oprot.WriteStructBeginAsync(struc, cancellationToken);
-      var field = new TField();
+      get
+      {
+        return _message;
+      }
+      set
+      {
+        __isset.message = true;
+        this._message = value;
+      }
+    }
+
+
+    public Isset __isset;
+    public struct Isset
+    {
+      public bool level;
+      public bool message;
+    }
+
+    public Log()
+    {
+    }
+
+    public Log DeepCopy()
+    {
+      var tmp67 = new Log();
       if((Level != null) && __isset.level)
       {
-        field.Name = "level";
-        field.Type = TType.String;
-        field.ID = 1;
-        await oprot.WriteFieldBeginAsync(field, cancellationToken);
-        await oprot.WriteStringAsync(Level, cancellationToken);
-        await oprot.WriteFieldEndAsync(cancellationToken);
+        tmp67.Level = this.Level;
+      }
+      tmp67.__isset.level = this.__isset.level;
+      if((Message != null) && __isset.message)
+      {
+        tmp67.Message = this.Message;
+      }
+      tmp67.__isset.message = this.__isset.message;
+      return tmp67;
+    }
+
+    public async global::System.Threading.Tasks.Task ReadAsync(TProtocol iprot, CancellationToken cancellationToken)
+    {
+      iprot.IncrementRecursionDepth();
+      try
+      {
+        TField field;
+        await iprot.ReadStructBeginAsync(cancellationToken);
+        while (true)
+        {
+          field = await iprot.ReadFieldBeginAsync(cancellationToken);
+          if (field.Type == TType.Stop)
+          {
+            break;
+          }
+
+          switch (field.ID)
+          {
+            case 1:
+              if (field.Type == TType.String)
+              {
+                Level = await iprot.ReadStringAsync(cancellationToken);
+              }
+              else
+              {
+                await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
+              }
+              break;
+            case 2:
+              if (field.Type == TType.String)
+              {
+                Message = await iprot.ReadStringAsync(cancellationToken);
+              }
+              else
+              {
+                await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
+              }
+              break;
+            default: 
+              await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
+              break;
+          }
+
+          await iprot.ReadFieldEndAsync(cancellationToken);
+        }
+
+        await iprot.ReadStructEndAsync(cancellationToken);
+      }
+      finally
+      {
+        iprot.DecrementRecursionDepth();
+      }
+    }
+
+    public async global::System.Threading.Tasks.Task WriteAsync(TProtocol oprot, CancellationToken cancellationToken)
+    {
+      oprot.IncrementRecursionDepth();
+      try
+      {
+        var struc = new TStruct("Log");
+        await oprot.WriteStructBeginAsync(struc, cancellationToken);
+        var field = new TField();
+        if((Level != null) && __isset.level)
+        {
+          field.Name = "level";
+          field.Type = TType.String;
+          field.ID = 1;
+          await oprot.WriteFieldBeginAsync(field, cancellationToken);
+          await oprot.WriteStringAsync(Level, cancellationToken);
+          await oprot.WriteFieldEndAsync(cancellationToken);
+        }
+        if((Message != null) && __isset.message)
+        {
+          field.Name = "message";
+          field.Type = TType.String;
+          field.ID = 2;
+          await oprot.WriteFieldBeginAsync(field, cancellationToken);
+          await oprot.WriteStringAsync(Message, cancellationToken);
+          await oprot.WriteFieldEndAsync(cancellationToken);
+        }
+        await oprot.WriteFieldStopAsync(cancellationToken);
+        await oprot.WriteStructEndAsync(cancellationToken);
+      }
+      finally
+      {
+        oprot.DecrementRecursionDepth();
+      }
+    }
+
+    public override bool Equals(object that)
+    {
+      if (!(that is Log other)) return false;
+      if (ReferenceEquals(this, other)) return true;
+      return ((__isset.level == other.__isset.level) && ((!__isset.level) || (System.Object.Equals(Level, other.Level))))
+        && ((__isset.message == other.__isset.message) && ((!__isset.message) || (System.Object.Equals(Message, other.Message))));
+    }
+
+    public override int GetHashCode() {
+      int hashcode = 157;
+      unchecked {
+        if((Level != null) && __isset.level)
+        {
+          hashcode = (hashcode * 397) + Level.GetHashCode();
+        }
+        if((Message != null) && __isset.message)
+        {
+          hashcode = (hashcode * 397) + Message.GetHashCode();
+        }
+      }
+      return hashcode;
+    }
+
+    public override string ToString()
+    {
+      var sb = new StringBuilder("Log(");
+      int tmp68 = 0;
+      if((Level != null) && __isset.level)
+      {
+        if(0 < tmp68++) { sb.Append(", "); }
+        sb.Append("Level: ");
+        Level.ToString(sb);
       }
       if((Message != null) && __isset.message)
       {
-        field.Name = "message";
-        field.Type = TType.String;
-        field.ID = 2;
-        await oprot.WriteFieldBeginAsync(field, cancellationToken);
-        await oprot.WriteStringAsync(Message, cancellationToken);
-        await oprot.WriteFieldEndAsync(cancellationToken);
+        if(0 < tmp68++) { sb.Append(", "); }
+        sb.Append("Message: ");
+        Message.ToString(sb);
       }
-      await oprot.WriteFieldStopAsync(cancellationToken);
-      await oprot.WriteStructEndAsync(cancellationToken);
-    }
-    finally
-    {
-      oprot.DecrementRecursionDepth();
+      sb.Append(')');
+      return sb.ToString();
     }
   }
 
-  public override bool Equals(object that)
-  {
-    if (!(that is Log other)) return false;
-    if (ReferenceEquals(this, other)) return true;
-    return ((__isset.level == other.__isset.level) && ((!__isset.level) || (System.Object.Equals(Level, other.Level))))
-      && ((__isset.message == other.__isset.message) && ((!__isset.message) || (System.Object.Equals(Message, other.Message))));
-  }
-
-  public override int GetHashCode() {
-    int hashcode = 157;
-    unchecked {
-      if((Level != null) && __isset.level)
-      {
-        hashcode = (hashcode * 397) + Level.GetHashCode();
-      }
-      if((Message != null) && __isset.message)
-      {
-        hashcode = (hashcode * 397) + Message.GetHashCode();
-      }
-    }
-    return hashcode;
-  }
-
-  public override string ToString()
-  {
-    var sb = new StringBuilder("Log(");
-    int tmp68 = 0;
-    if((Level != null) && __isset.level)
-    {
-      if(0 < tmp68++) { sb.Append(", "); }
-      sb.Append("Level: ");
-      Level.ToString(sb);
-    }
-    if((Message != null) && __isset.message)
-    {
-      if(0 < tmp68++) { sb.Append(", "); }
-      sb.Append("Message: ");
-      Message.ToString(sb);
-    }
-    sb.Append(')');
-    return sb.ToString();
-  }
 }
-

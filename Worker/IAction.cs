@@ -1,4 +1,6 @@
 
+using FusioWorker.Generated;
+
 namespace FusioWorker
 {
     interface IAction

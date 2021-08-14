@@ -5,14 +5,14 @@ using System.Data.Common;
 using System.Net.Http;
 using System.Web;
 
-namespace FusioWorker
+namespace FusioWorker.Connector
 {
     public class Connector
     {
-        private FusioWorker.Connector.Connections connections;
+        private Connections connections;
         private Dictionary<string, object> instances = new Dictionary<string, object>();
 
-        public Connector(FusioWorker.Connector.Connections connections)
+        public Connector(Connections connections)
         {
             this.connections = connections;
         }
@@ -24,7 +24,7 @@ namespace FusioWorker
                 return this.instances[name];
             }
 
-            if (!this.connections.containsKey(name))
+            if (!this.connections.ContainsKey(name))
             {
                 throw new Exception("Provided connection is not configured");
             }

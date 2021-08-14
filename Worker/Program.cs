@@ -1,9 +1,12 @@
+using FusioWorker.Generated;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Net;
+using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
+using Thrift;
 using Thrift.Processor;
 using Thrift.Protocol;
 using Thrift.Server;
@@ -14,59 +17,58 @@ namespace FusioWorker
 {
     public class Program
     {
+        private static readonly ServiceCollection serviceCollection = new ServiceCollection();
+        private static ILogger logger;
+
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
-        }
+            serviceCollection.AddLogging(logging => ConfigureLogging(logging));
+            using (var serviceProvider = serviceCollection.BuildServiceProvider())
+            {
+                logger = serviceProvider.GetService<ILoggerFactory>().CreateLogger(nameof(Program));
+                logger.LogInformation("Fusio Worker started");
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureServices((hostContext, services) =>
+                using (var source = new CancellationTokenSource())
                 {
-                    services.AddHostedService<Server>();
-                });
-    }
+                    RunServer(source.Token).GetAwaiter().GetResult();
 
-    public class Server : BackgroundService
-    {
-        private readonly ILogger _logger;
+                    logger.LogInformation("Press any key to stop...");
 
-        public Server(ILogger<Server> logger)
-        {
-            this._logger = logger;
+                    Console.ReadLine();
+                    source.Cancel();
+                }
+            }
         }
 
-        protected override async Task ExecuteAsync(CancellationToken cancellationToken)
+        private static async Task RunServer(CancellationToken cancellationToken)
         {
-            TServerTransport serverTransport = new TServerSocketTransport(9094, new Thrift.TConfiguration());
-            TTransportFactory transportFactory = null;
+            var listener = new TcpListener(IPAddress.Parse("0.0.0.0"), 9094);
+
+            TServerTransport serverTransport = new TServerSocketTransport(listener, new TConfiguration());
+            TTransportFactory transportFactory = new TFramedTransport.Factory();
             TProtocolFactory protocolFactory = new TBinaryProtocol.Factory();
 
-            var handler = new WorkerHandler();
+            var handler = new WorkerHandler(logger);
             ITAsyncProcessor processor = new Worker.AsyncProcessor(handler);
 
-            try
-            {
-                var server = new TSimpleAsyncServer(
-                    itProcessorFactory: new TSingletonProcessorFactory(processor),
-                    serverTransport: serverTransport,
-                    inputTransportFactory: transportFactory,
-                    outputTransportFactory: transportFactory,
-                    inputProtocolFactory: protocolFactory,
-                    outputProtocolFactory: protocolFactory,
-                    logger: this._logger
-                );
+            var server = new TSimpleAsyncServer(
+                itProcessorFactory: new TSingletonProcessorFactory(processor),
+                serverTransport: serverTransport,
+                inputTransportFactory: transportFactory,
+                outputTransportFactory: transportFactory,
+                inputProtocolFactory: protocolFactory,
+                outputProtocolFactory: protocolFactory,
+                logger: logger
+            );
 
-                this._logger.LogInformation("Fusio Worker started");
+            await server.ServeAsync(cancellationToken);
+        }
 
-                await server.ServeAsync(cancellationToken);
-            }
-            catch (Exception x)
-            {
-                this._logger.LogError("An error occurred: " + x.ToString());
-            }
+        private static void ConfigureLogging(ILoggingBuilder logging)
+        {
+            logging.SetMinimumLevel(LogLevel.Information);
+            logging.AddConsole();
+            logging.AddDebug();
         }
     }
-
-
 }

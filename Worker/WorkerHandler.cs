@@ -1,13 +1,10 @@
 
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
+using FusioWorker.Connector;
+using FusioWorker.Generated;
 using Microsoft.CodeAnalysis.CSharp.Scripting;
 using Microsoft.CodeAnalysis.Scripting;
-using Microsoft.CodeAnalysis.Text;
-using Microsoft.CSharp;
 using Microsoft.Extensions.Logging;
 using System;
-using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
@@ -20,18 +17,27 @@ namespace FusioWorker
     {
         private readonly static string ACTION_DIR = "./actions";
 
-        private FusioWorker.Connector.Connections connections = null;
-        private readonly ILogger _logger;
+        private Connections connections = null;
+        private ILogger logger;
 
-        public Task<Message> setConnectionAsync(Connection connection, CancellationToken cancellationToken = default)
+        public WorkerHandler(ILogger logger)
         {
+            this.logger = logger;
+
+            this.logger.LogInformation("Create logger");
+        }
+
+        public Task<Message> setConnectionAsync(Generated.Connection connection, CancellationToken cancellationToken = default)
+        {
+            this.logger.LogInformation("call setConnectionAsync");
+
             if (!Directory.Exists(WorkerHandler.ACTION_DIR))
             {
                 Directory.CreateDirectory(WorkerHandler.ACTION_DIR);
             }
 
             Message msg;
-            FusioWorker.Connector.Connections connections = this.ReadConnections();
+            Connections connections = this.ReadConnections();
 
             if (String.IsNullOrEmpty(connection.Name))
             {
@@ -42,7 +48,7 @@ namespace FusioWorker
                 return Task.FromResult(msg);
             }
 
-            FusioWorker.Connector.Connection conf = new FusioWorker.Connector.Connection
+            Connector.Connection conf = new Connector.Connection
             {
                 Type = connection.Type,
                 Config = connection.Config
@@ -55,7 +61,7 @@ namespace FusioWorker
             // reset connections
             this.connections = null;
 
-            this._logger.LogInformation("Update connection " + connection.Name);
+            this.logger.LogInformation("Update connection " + connection.Name);
 
             msg = new Message();
             msg.Success = true;
@@ -64,8 +70,10 @@ namespace FusioWorker
             return Task.FromResult(msg);
         }
 
-        public Task<Message> setActionAsync(Action action, CancellationToken cancellationToken = default)
+        public Task<Message> setActionAsync(Generated.Action action, CancellationToken cancellationToken = default)
         {
+            this.logger.LogInformation("call setActionAsync");
+
             if (!Directory.Exists(WorkerHandler.ACTION_DIR))
             {
                 Directory.CreateDirectory(WorkerHandler.ACTION_DIR);
@@ -87,7 +95,7 @@ namespace FusioWorker
 
             // TODO optional delete cache
 
-            this._logger.LogInformation("Update action " + action.Name);
+            this.logger.LogInformation("Update action " + action.Name);
 
             msg = new Message();
             msg.Success = true;
@@ -98,23 +106,48 @@ namespace FusioWorker
 
         public Task<Result> executeActionAsync(Execute execute, CancellationToken cancellationToken = default)
         {
-            Connector connector = new Connector(this.ReadConnections());
+            this.logger.LogInformation("call executeActionAsync");
+
+            Connector.Connector connector = new Connector.Connector(this.ReadConnections());
             Dispatcher dispatcher = new Dispatcher();
             Logger logger = new Logger();
+            Result result;
 
             if (String.IsNullOrEmpty(execute.Action)) {
                 return null;
             }
 
-            this._logger.LogInformation("Execute action " + execute.Action);
+            this.logger.LogInformation("Execute action " + execute.Action);
 
-            string file = WorkerHandler.ACTION_DIR + "/" + execute.Action + ".cs";
+            string file = WorkerHandler.ACTION_DIR + "/" + execute.Action + ".csx";
 
             try
             {
-                IAction action = this.CreateActionInstance(file);
+                var sourceCode = File.ReadAllText(file);
 
-                action.Handle();
+                var options = ScriptOptions.Default;
+                options.AddImports("FusioWorker.Generated");
+
+                var api = new FusioAPI(connector, dispatcher, logger);
+
+                Response resp = null;
+                CSharpScript.EvaluateAsync<Response>(sourceCode, options, api)
+                    .ContinueWith(s => resp = s.Result)
+                    .Wait();
+
+                if (resp == null)
+                {
+                    throw new Exception("Script does not return a response");
+                }
+
+                result = new Result
+                {
+                    Response = resp,
+                    Events = dispatcher.GetEvents(),
+                    Logs = logger.GetLogs()
+                };
+
+                return Task.FromResult(result);
             }
             catch(Exception e)
             {
@@ -131,7 +164,7 @@ namespace FusioWorker
                     Body = JsonSerializer.Serialize(body)
                 };
 
-                Result result = new Result
+                result = new Result
                 {
                     Response = resp
                 };
@@ -140,52 +173,36 @@ namespace FusioWorker
             }
         }
 
-        private FusioWorker.Connector.Connections ReadConnections()
+        private Connections ReadConnections()
         {
-            return new FusioWorker.Connector.Connections();
-        }
-
-        //
-        // @see https://gist.github.com/RickStrahl/f65727881668488b0a562df4c21ab560
-        //
-        private IAction CreateActionInstance(string actionName, string file)
-        {
-            var options = ScriptOptions.Default;
-            options.AddImports("System");
-            options.AddImports("FusioWorker.Generated");
-
-            var sourceCode = File.ReadAllText(file);
-
-            var finalScript = CSharpScript.Create(sourceCode, options, typeof(FusioAPI));
-            finalScript.Compile();
-
-            Compilation compilation = finalScript.GetCompilation();
-
-            SyntaxTree syntaxTree = compilation.SyntaxTrees.First();
-            syntaxRootNode = syntaxTree.GetRoot() as CompilationUnitSyntax;
-            semanticModel = compilation.GetSemanticModel(compilation.SyntaxTrees.First());
-
-            ScriptState<object> result = await finalScript.RunAsync(new FusioAPI());
-
-            var result = CSharpScript.EvaluateAsync(sourceCode, opt);
-
-
-            if (inst is IAction)
+            if (this.connections != null)
             {
-                return inst;
+                return this.connections;
             }
-            else
+
+            string file = WorkerHandler.ACTION_DIR + "/connections.json";
+            if (File.Exists(file))
             {
-                throw new Exception("Action is not an instance of IAction");
+                this.connections = (Connections)JsonSerializer.Deserialize(File.ReadAllText(file), typeof(Connections));
             }
+
+            return this.connections != null ? this.connections : new Connections();
         }
     }
 
     public class FusioAPI
     {
-        public void Connector(string input)
+        public readonly Connector.Connector connector;
+        public readonly Dispatcher dispatcher;
+        public readonly Logger logger;
+        public readonly ResponseBuilder response;
+        
+        public FusioAPI(Connector.Connector connector, Dispatcher dispatcher, Logger logger)
         {
-            Console.WriteLine(input);
+            this.connector = connector;
+            this.dispatcher = dispatcher;
+            this.logger = logger;
+            this.response = new ResponseBuilder();
         }
     }
 }

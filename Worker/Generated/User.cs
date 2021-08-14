@@ -28,445 +28,448 @@ using Thrift.Processor;
 #pragma warning disable IDE0079  // remove unnecessary pragmas
 #pragma warning disable IDE1006  // parts of the code use IDL spelling
 
-
-public partial class User : TBase
+namespace FusioWorker.Generated
 {
-  private long _id;
-  private long _roleId;
-  private long _categoryId;
-  private int _status;
-  private string _name;
-  private string _email;
-  private int _points;
 
-  public long Id
+  public partial class User : TBase
   {
-    get
-    {
-      return _id;
-    }
-    set
-    {
-      __isset.id = true;
-      this._id = value;
-    }
-  }
+    private long _id;
+    private long _roleId;
+    private long _categoryId;
+    private int _status;
+    private string _name;
+    private string _email;
+    private int _points;
 
-  public long RoleId
-  {
-    get
+    public long Id
     {
-      return _roleId;
-    }
-    set
-    {
-      __isset.roleId = true;
-      this._roleId = value;
-    }
-  }
-
-  public long CategoryId
-  {
-    get
-    {
-      return _categoryId;
-    }
-    set
-    {
-      __isset.categoryId = true;
-      this._categoryId = value;
-    }
-  }
-
-  public int Status
-  {
-    get
-    {
-      return _status;
-    }
-    set
-    {
-      __isset.status = true;
-      this._status = value;
-    }
-  }
-
-  public string Name
-  {
-    get
-    {
-      return _name;
-    }
-    set
-    {
-      __isset.name = true;
-      this._name = value;
-    }
-  }
-
-  public string Email
-  {
-    get
-    {
-      return _email;
-    }
-    set
-    {
-      __isset.email = true;
-      this._email = value;
-    }
-  }
-
-  public int Points
-  {
-    get
-    {
-      return _points;
-    }
-    set
-    {
-      __isset.points = true;
-      this._points = value;
-    }
-  }
-
-
-  public Isset __isset;
-  public struct Isset
-  {
-    public bool id;
-    public bool roleId;
-    public bool categoryId;
-    public bool status;
-    public bool name;
-    public bool email;
-    public bool points;
-  }
-
-  public User()
-  {
-  }
-
-  public User DeepCopy()
-  {
-    var tmp46 = new User();
-    if(__isset.id)
-    {
-      tmp46.Id = this.Id;
-    }
-    tmp46.__isset.id = this.__isset.id;
-    if(__isset.roleId)
-    {
-      tmp46.RoleId = this.RoleId;
-    }
-    tmp46.__isset.roleId = this.__isset.roleId;
-    if(__isset.categoryId)
-    {
-      tmp46.CategoryId = this.CategoryId;
-    }
-    tmp46.__isset.categoryId = this.__isset.categoryId;
-    if(__isset.status)
-    {
-      tmp46.Status = this.Status;
-    }
-    tmp46.__isset.status = this.__isset.status;
-    if((Name != null) && __isset.name)
-    {
-      tmp46.Name = this.Name;
-    }
-    tmp46.__isset.name = this.__isset.name;
-    if((Email != null) && __isset.email)
-    {
-      tmp46.Email = this.Email;
-    }
-    tmp46.__isset.email = this.__isset.email;
-    if(__isset.points)
-    {
-      tmp46.Points = this.Points;
-    }
-    tmp46.__isset.points = this.__isset.points;
-    return tmp46;
-  }
-
-  public async global::System.Threading.Tasks.Task ReadAsync(TProtocol iprot, CancellationToken cancellationToken)
-  {
-    iprot.IncrementRecursionDepth();
-    try
-    {
-      TField field;
-      await iprot.ReadStructBeginAsync(cancellationToken);
-      while (true)
+      get
       {
-        field = await iprot.ReadFieldBeginAsync(cancellationToken);
-        if (field.Type == TType.Stop)
-        {
-          break;
-        }
-
-        switch (field.ID)
-        {
-          case 1:
-            if (field.Type == TType.I64)
-            {
-              Id = await iprot.ReadI64Async(cancellationToken);
-            }
-            else
-            {
-              await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
-            }
-            break;
-          case 2:
-            if (field.Type == TType.I64)
-            {
-              RoleId = await iprot.ReadI64Async(cancellationToken);
-            }
-            else
-            {
-              await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
-            }
-            break;
-          case 3:
-            if (field.Type == TType.I64)
-            {
-              CategoryId = await iprot.ReadI64Async(cancellationToken);
-            }
-            else
-            {
-              await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
-            }
-            break;
-          case 4:
-            if (field.Type == TType.I32)
-            {
-              Status = await iprot.ReadI32Async(cancellationToken);
-            }
-            else
-            {
-              await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
-            }
-            break;
-          case 5:
-            if (field.Type == TType.String)
-            {
-              Name = await iprot.ReadStringAsync(cancellationToken);
-            }
-            else
-            {
-              await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
-            }
-            break;
-          case 6:
-            if (field.Type == TType.String)
-            {
-              Email = await iprot.ReadStringAsync(cancellationToken);
-            }
-            else
-            {
-              await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
-            }
-            break;
-          case 7:
-            if (field.Type == TType.I32)
-            {
-              Points = await iprot.ReadI32Async(cancellationToken);
-            }
-            else
-            {
-              await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
-            }
-            break;
-          default: 
-            await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
-            break;
-        }
-
-        await iprot.ReadFieldEndAsync(cancellationToken);
+        return _id;
       }
-
-      await iprot.ReadStructEndAsync(cancellationToken);
+      set
+      {
+        __isset.id = true;
+        this._id = value;
+      }
     }
-    finally
-    {
-      iprot.DecrementRecursionDepth();
-    }
-  }
 
-  public async global::System.Threading.Tasks.Task WriteAsync(TProtocol oprot, CancellationToken cancellationToken)
-  {
-    oprot.IncrementRecursionDepth();
-    try
+    public long RoleId
     {
-      var struc = new TStruct("User");
-      await oprot.WriteStructBeginAsync(struc, cancellationToken);
-      var field = new TField();
+      get
+      {
+        return _roleId;
+      }
+      set
+      {
+        __isset.roleId = true;
+        this._roleId = value;
+      }
+    }
+
+    public long CategoryId
+    {
+      get
+      {
+        return _categoryId;
+      }
+      set
+      {
+        __isset.categoryId = true;
+        this._categoryId = value;
+      }
+    }
+
+    public int Status
+    {
+      get
+      {
+        return _status;
+      }
+      set
+      {
+        __isset.status = true;
+        this._status = value;
+      }
+    }
+
+    public string Name
+    {
+      get
+      {
+        return _name;
+      }
+      set
+      {
+        __isset.name = true;
+        this._name = value;
+      }
+    }
+
+    public string Email
+    {
+      get
+      {
+        return _email;
+      }
+      set
+      {
+        __isset.email = true;
+        this._email = value;
+      }
+    }
+
+    public int Points
+    {
+      get
+      {
+        return _points;
+      }
+      set
+      {
+        __isset.points = true;
+        this._points = value;
+      }
+    }
+
+
+    public Isset __isset;
+    public struct Isset
+    {
+      public bool id;
+      public bool roleId;
+      public bool categoryId;
+      public bool status;
+      public bool name;
+      public bool email;
+      public bool points;
+    }
+
+    public User()
+    {
+    }
+
+    public User DeepCopy()
+    {
+      var tmp46 = new User();
       if(__isset.id)
       {
-        field.Name = "id";
-        field.Type = TType.I64;
-        field.ID = 1;
-        await oprot.WriteFieldBeginAsync(field, cancellationToken);
-        await oprot.WriteI64Async(Id, cancellationToken);
-        await oprot.WriteFieldEndAsync(cancellationToken);
+        tmp46.Id = this.Id;
+      }
+      tmp46.__isset.id = this.__isset.id;
+      if(__isset.roleId)
+      {
+        tmp46.RoleId = this.RoleId;
+      }
+      tmp46.__isset.roleId = this.__isset.roleId;
+      if(__isset.categoryId)
+      {
+        tmp46.CategoryId = this.CategoryId;
+      }
+      tmp46.__isset.categoryId = this.__isset.categoryId;
+      if(__isset.status)
+      {
+        tmp46.Status = this.Status;
+      }
+      tmp46.__isset.status = this.__isset.status;
+      if((Name != null) && __isset.name)
+      {
+        tmp46.Name = this.Name;
+      }
+      tmp46.__isset.name = this.__isset.name;
+      if((Email != null) && __isset.email)
+      {
+        tmp46.Email = this.Email;
+      }
+      tmp46.__isset.email = this.__isset.email;
+      if(__isset.points)
+      {
+        tmp46.Points = this.Points;
+      }
+      tmp46.__isset.points = this.__isset.points;
+      return tmp46;
+    }
+
+    public async global::System.Threading.Tasks.Task ReadAsync(TProtocol iprot, CancellationToken cancellationToken)
+    {
+      iprot.IncrementRecursionDepth();
+      try
+      {
+        TField field;
+        await iprot.ReadStructBeginAsync(cancellationToken);
+        while (true)
+        {
+          field = await iprot.ReadFieldBeginAsync(cancellationToken);
+          if (field.Type == TType.Stop)
+          {
+            break;
+          }
+
+          switch (field.ID)
+          {
+            case 1:
+              if (field.Type == TType.I64)
+              {
+                Id = await iprot.ReadI64Async(cancellationToken);
+              }
+              else
+              {
+                await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
+              }
+              break;
+            case 2:
+              if (field.Type == TType.I64)
+              {
+                RoleId = await iprot.ReadI64Async(cancellationToken);
+              }
+              else
+              {
+                await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
+              }
+              break;
+            case 3:
+              if (field.Type == TType.I64)
+              {
+                CategoryId = await iprot.ReadI64Async(cancellationToken);
+              }
+              else
+              {
+                await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
+              }
+              break;
+            case 4:
+              if (field.Type == TType.I32)
+              {
+                Status = await iprot.ReadI32Async(cancellationToken);
+              }
+              else
+              {
+                await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
+              }
+              break;
+            case 5:
+              if (field.Type == TType.String)
+              {
+                Name = await iprot.ReadStringAsync(cancellationToken);
+              }
+              else
+              {
+                await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
+              }
+              break;
+            case 6:
+              if (field.Type == TType.String)
+              {
+                Email = await iprot.ReadStringAsync(cancellationToken);
+              }
+              else
+              {
+                await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
+              }
+              break;
+            case 7:
+              if (field.Type == TType.I32)
+              {
+                Points = await iprot.ReadI32Async(cancellationToken);
+              }
+              else
+              {
+                await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
+              }
+              break;
+            default: 
+              await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
+              break;
+          }
+
+          await iprot.ReadFieldEndAsync(cancellationToken);
+        }
+
+        await iprot.ReadStructEndAsync(cancellationToken);
+      }
+      finally
+      {
+        iprot.DecrementRecursionDepth();
+      }
+    }
+
+    public async global::System.Threading.Tasks.Task WriteAsync(TProtocol oprot, CancellationToken cancellationToken)
+    {
+      oprot.IncrementRecursionDepth();
+      try
+      {
+        var struc = new TStruct("User");
+        await oprot.WriteStructBeginAsync(struc, cancellationToken);
+        var field = new TField();
+        if(__isset.id)
+        {
+          field.Name = "id";
+          field.Type = TType.I64;
+          field.ID = 1;
+          await oprot.WriteFieldBeginAsync(field, cancellationToken);
+          await oprot.WriteI64Async(Id, cancellationToken);
+          await oprot.WriteFieldEndAsync(cancellationToken);
+        }
+        if(__isset.roleId)
+        {
+          field.Name = "roleId";
+          field.Type = TType.I64;
+          field.ID = 2;
+          await oprot.WriteFieldBeginAsync(field, cancellationToken);
+          await oprot.WriteI64Async(RoleId, cancellationToken);
+          await oprot.WriteFieldEndAsync(cancellationToken);
+        }
+        if(__isset.categoryId)
+        {
+          field.Name = "categoryId";
+          field.Type = TType.I64;
+          field.ID = 3;
+          await oprot.WriteFieldBeginAsync(field, cancellationToken);
+          await oprot.WriteI64Async(CategoryId, cancellationToken);
+          await oprot.WriteFieldEndAsync(cancellationToken);
+        }
+        if(__isset.status)
+        {
+          field.Name = "status";
+          field.Type = TType.I32;
+          field.ID = 4;
+          await oprot.WriteFieldBeginAsync(field, cancellationToken);
+          await oprot.WriteI32Async(Status, cancellationToken);
+          await oprot.WriteFieldEndAsync(cancellationToken);
+        }
+        if((Name != null) && __isset.name)
+        {
+          field.Name = "name";
+          field.Type = TType.String;
+          field.ID = 5;
+          await oprot.WriteFieldBeginAsync(field, cancellationToken);
+          await oprot.WriteStringAsync(Name, cancellationToken);
+          await oprot.WriteFieldEndAsync(cancellationToken);
+        }
+        if((Email != null) && __isset.email)
+        {
+          field.Name = "email";
+          field.Type = TType.String;
+          field.ID = 6;
+          await oprot.WriteFieldBeginAsync(field, cancellationToken);
+          await oprot.WriteStringAsync(Email, cancellationToken);
+          await oprot.WriteFieldEndAsync(cancellationToken);
+        }
+        if(__isset.points)
+        {
+          field.Name = "points";
+          field.Type = TType.I32;
+          field.ID = 7;
+          await oprot.WriteFieldBeginAsync(field, cancellationToken);
+          await oprot.WriteI32Async(Points, cancellationToken);
+          await oprot.WriteFieldEndAsync(cancellationToken);
+        }
+        await oprot.WriteFieldStopAsync(cancellationToken);
+        await oprot.WriteStructEndAsync(cancellationToken);
+      }
+      finally
+      {
+        oprot.DecrementRecursionDepth();
+      }
+    }
+
+    public override bool Equals(object that)
+    {
+      if (!(that is User other)) return false;
+      if (ReferenceEquals(this, other)) return true;
+      return ((__isset.id == other.__isset.id) && ((!__isset.id) || (System.Object.Equals(Id, other.Id))))
+        && ((__isset.roleId == other.__isset.roleId) && ((!__isset.roleId) || (System.Object.Equals(RoleId, other.RoleId))))
+        && ((__isset.categoryId == other.__isset.categoryId) && ((!__isset.categoryId) || (System.Object.Equals(CategoryId, other.CategoryId))))
+        && ((__isset.status == other.__isset.status) && ((!__isset.status) || (System.Object.Equals(Status, other.Status))))
+        && ((__isset.name == other.__isset.name) && ((!__isset.name) || (System.Object.Equals(Name, other.Name))))
+        && ((__isset.email == other.__isset.email) && ((!__isset.email) || (System.Object.Equals(Email, other.Email))))
+        && ((__isset.points == other.__isset.points) && ((!__isset.points) || (System.Object.Equals(Points, other.Points))));
+    }
+
+    public override int GetHashCode() {
+      int hashcode = 157;
+      unchecked {
+        if(__isset.id)
+        {
+          hashcode = (hashcode * 397) + Id.GetHashCode();
+        }
+        if(__isset.roleId)
+        {
+          hashcode = (hashcode * 397) + RoleId.GetHashCode();
+        }
+        if(__isset.categoryId)
+        {
+          hashcode = (hashcode * 397) + CategoryId.GetHashCode();
+        }
+        if(__isset.status)
+        {
+          hashcode = (hashcode * 397) + Status.GetHashCode();
+        }
+        if((Name != null) && __isset.name)
+        {
+          hashcode = (hashcode * 397) + Name.GetHashCode();
+        }
+        if((Email != null) && __isset.email)
+        {
+          hashcode = (hashcode * 397) + Email.GetHashCode();
+        }
+        if(__isset.points)
+        {
+          hashcode = (hashcode * 397) + Points.GetHashCode();
+        }
+      }
+      return hashcode;
+    }
+
+    public override string ToString()
+    {
+      var sb = new StringBuilder("User(");
+      int tmp47 = 0;
+      if(__isset.id)
+      {
+        if(0 < tmp47++) { sb.Append(", "); }
+        sb.Append("Id: ");
+        Id.ToString(sb);
       }
       if(__isset.roleId)
       {
-        field.Name = "roleId";
-        field.Type = TType.I64;
-        field.ID = 2;
-        await oprot.WriteFieldBeginAsync(field, cancellationToken);
-        await oprot.WriteI64Async(RoleId, cancellationToken);
-        await oprot.WriteFieldEndAsync(cancellationToken);
+        if(0 < tmp47++) { sb.Append(", "); }
+        sb.Append("RoleId: ");
+        RoleId.ToString(sb);
       }
       if(__isset.categoryId)
       {
-        field.Name = "categoryId";
-        field.Type = TType.I64;
-        field.ID = 3;
-        await oprot.WriteFieldBeginAsync(field, cancellationToken);
-        await oprot.WriteI64Async(CategoryId, cancellationToken);
-        await oprot.WriteFieldEndAsync(cancellationToken);
+        if(0 < tmp47++) { sb.Append(", "); }
+        sb.Append("CategoryId: ");
+        CategoryId.ToString(sb);
       }
       if(__isset.status)
       {
-        field.Name = "status";
-        field.Type = TType.I32;
-        field.ID = 4;
-        await oprot.WriteFieldBeginAsync(field, cancellationToken);
-        await oprot.WriteI32Async(Status, cancellationToken);
-        await oprot.WriteFieldEndAsync(cancellationToken);
+        if(0 < tmp47++) { sb.Append(", "); }
+        sb.Append("Status: ");
+        Status.ToString(sb);
       }
       if((Name != null) && __isset.name)
       {
-        field.Name = "name";
-        field.Type = TType.String;
-        field.ID = 5;
-        await oprot.WriteFieldBeginAsync(field, cancellationToken);
-        await oprot.WriteStringAsync(Name, cancellationToken);
-        await oprot.WriteFieldEndAsync(cancellationToken);
+        if(0 < tmp47++) { sb.Append(", "); }
+        sb.Append("Name: ");
+        Name.ToString(sb);
       }
       if((Email != null) && __isset.email)
       {
-        field.Name = "email";
-        field.Type = TType.String;
-        field.ID = 6;
-        await oprot.WriteFieldBeginAsync(field, cancellationToken);
-        await oprot.WriteStringAsync(Email, cancellationToken);
-        await oprot.WriteFieldEndAsync(cancellationToken);
+        if(0 < tmp47++) { sb.Append(", "); }
+        sb.Append("Email: ");
+        Email.ToString(sb);
       }
       if(__isset.points)
       {
-        field.Name = "points";
-        field.Type = TType.I32;
-        field.ID = 7;
-        await oprot.WriteFieldBeginAsync(field, cancellationToken);
-        await oprot.WriteI32Async(Points, cancellationToken);
-        await oprot.WriteFieldEndAsync(cancellationToken);
+        if(0 < tmp47++) { sb.Append(", "); }
+        sb.Append("Points: ");
+        Points.ToString(sb);
       }
-      await oprot.WriteFieldStopAsync(cancellationToken);
-      await oprot.WriteStructEndAsync(cancellationToken);
-    }
-    finally
-    {
-      oprot.DecrementRecursionDepth();
+      sb.Append(')');
+      return sb.ToString();
     }
   }
 
-  public override bool Equals(object that)
-  {
-    if (!(that is User other)) return false;
-    if (ReferenceEquals(this, other)) return true;
-    return ((__isset.id == other.__isset.id) && ((!__isset.id) || (System.Object.Equals(Id, other.Id))))
-      && ((__isset.roleId == other.__isset.roleId) && ((!__isset.roleId) || (System.Object.Equals(RoleId, other.RoleId))))
-      && ((__isset.categoryId == other.__isset.categoryId) && ((!__isset.categoryId) || (System.Object.Equals(CategoryId, other.CategoryId))))
-      && ((__isset.status == other.__isset.status) && ((!__isset.status) || (System.Object.Equals(Status, other.Status))))
-      && ((__isset.name == other.__isset.name) && ((!__isset.name) || (System.Object.Equals(Name, other.Name))))
-      && ((__isset.email == other.__isset.email) && ((!__isset.email) || (System.Object.Equals(Email, other.Email))))
-      && ((__isset.points == other.__isset.points) && ((!__isset.points) || (System.Object.Equals(Points, other.Points))));
-  }
-
-  public override int GetHashCode() {
-    int hashcode = 157;
-    unchecked {
-      if(__isset.id)
-      {
-        hashcode = (hashcode * 397) + Id.GetHashCode();
-      }
-      if(__isset.roleId)
-      {
-        hashcode = (hashcode * 397) + RoleId.GetHashCode();
-      }
-      if(__isset.categoryId)
-      {
-        hashcode = (hashcode * 397) + CategoryId.GetHashCode();
-      }
-      if(__isset.status)
-      {
-        hashcode = (hashcode * 397) + Status.GetHashCode();
-      }
-      if((Name != null) && __isset.name)
-      {
-        hashcode = (hashcode * 397) + Name.GetHashCode();
-      }
-      if((Email != null) && __isset.email)
-      {
-        hashcode = (hashcode * 397) + Email.GetHashCode();
-      }
-      if(__isset.points)
-      {
-        hashcode = (hashcode * 397) + Points.GetHashCode();
-      }
-    }
-    return hashcode;
-  }
-
-  public override string ToString()
-  {
-    var sb = new StringBuilder("User(");
-    int tmp47 = 0;
-    if(__isset.id)
-    {
-      if(0 < tmp47++) { sb.Append(", "); }
-      sb.Append("Id: ");
-      Id.ToString(sb);
-    }
-    if(__isset.roleId)
-    {
-      if(0 < tmp47++) { sb.Append(", "); }
-      sb.Append("RoleId: ");
-      RoleId.ToString(sb);
-    }
-    if(__isset.categoryId)
-    {
-      if(0 < tmp47++) { sb.Append(", "); }
-      sb.Append("CategoryId: ");
-      CategoryId.ToString(sb);
-    }
-    if(__isset.status)
-    {
-      if(0 < tmp47++) { sb.Append(", "); }
-      sb.Append("Status: ");
-      Status.ToString(sb);
-    }
-    if((Name != null) && __isset.name)
-    {
-      if(0 < tmp47++) { sb.Append(", "); }
-      sb.Append("Name: ");
-      Name.ToString(sb);
-    }
-    if((Email != null) && __isset.email)
-    {
-      if(0 < tmp47++) { sb.Append(", "); }
-      sb.Append("Email: ");
-      Email.ToString(sb);
-    }
-    if(__isset.points)
-    {
-      if(0 < tmp47++) { sb.Append(", "); }
-      sb.Append("Points: ");
-      Points.ToString(sb);
-    }
-    sb.Append(')');
-    return sb.ToString();
-  }
 }
-

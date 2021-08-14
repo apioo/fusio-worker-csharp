@@ -1,4 +1,5 @@
 
+using FusioWorker.Generated;
 using System.Collections.Generic;
 
 namespace FusioWorker

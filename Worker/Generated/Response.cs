@@ -28,265 +28,268 @@ using Thrift.Processor;
 #pragma warning disable IDE0079  // remove unnecessary pragmas
 #pragma warning disable IDE1006  // parts of the code use IDL spelling
 
-
-public partial class Response : TBase
+namespace FusioWorker.Generated
 {
-  private int _statusCode;
-  private Dictionary<string, string> _headers;
-  private string _body;
 
-  public int StatusCode
+  public partial class Response : TBase
   {
-    get
-    {
-      return _statusCode;
-    }
-    set
-    {
-      __isset.statusCode = true;
-      this._statusCode = value;
-    }
-  }
+    private int _statusCode;
+    private Dictionary<string, string> _headers;
+    private string _body;
 
-  public Dictionary<string, string> Headers
-  {
-    get
+    public int StatusCode
     {
-      return _headers;
-    }
-    set
-    {
-      __isset.headers = true;
-      this._headers = value;
-    }
-  }
-
-  public string Body
-  {
-    get
-    {
-      return _body;
-    }
-    set
-    {
-      __isset.body = true;
-      this._body = value;
-    }
-  }
-
-
-  public Isset __isset;
-  public struct Isset
-  {
-    public bool statusCode;
-    public bool headers;
-    public bool body;
-  }
-
-  public Response()
-  {
-  }
-
-  public Response DeepCopy()
-  {
-    var tmp58 = new Response();
-    if(__isset.statusCode)
-    {
-      tmp58.StatusCode = this.StatusCode;
-    }
-    tmp58.__isset.statusCode = this.__isset.statusCode;
-    if((Headers != null) && __isset.headers)
-    {
-      tmp58.Headers = this.Headers.DeepCopy();
-    }
-    tmp58.__isset.headers = this.__isset.headers;
-    if((Body != null) && __isset.body)
-    {
-      tmp58.Body = this.Body;
-    }
-    tmp58.__isset.body = this.__isset.body;
-    return tmp58;
-  }
-
-  public async global::System.Threading.Tasks.Task ReadAsync(TProtocol iprot, CancellationToken cancellationToken)
-  {
-    iprot.IncrementRecursionDepth();
-    try
-    {
-      TField field;
-      await iprot.ReadStructBeginAsync(cancellationToken);
-      while (true)
+      get
       {
-        field = await iprot.ReadFieldBeginAsync(cancellationToken);
-        if (field.Type == TType.Stop)
-        {
-          break;
-        }
-
-        switch (field.ID)
-        {
-          case 1:
-            if (field.Type == TType.I32)
-            {
-              StatusCode = await iprot.ReadI32Async(cancellationToken);
-            }
-            else
-            {
-              await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
-            }
-            break;
-          case 2:
-            if (field.Type == TType.Map)
-            {
-              {
-                TMap _map59 = await iprot.ReadMapBeginAsync(cancellationToken);
-                Headers = new Dictionary<string, string>(_map59.Count);
-                for(int _i60 = 0; _i60 < _map59.Count; ++_i60)
-                {
-                  string _key61;
-                  string _val62;
-                  _key61 = await iprot.ReadStringAsync(cancellationToken);
-                  _val62 = await iprot.ReadStringAsync(cancellationToken);
-                  Headers[_key61] = _val62;
-                }
-                await iprot.ReadMapEndAsync(cancellationToken);
-              }
-            }
-            else
-            {
-              await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
-            }
-            break;
-          case 3:
-            if (field.Type == TType.String)
-            {
-              Body = await iprot.ReadStringAsync(cancellationToken);
-            }
-            else
-            {
-              await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
-            }
-            break;
-          default: 
-            await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
-            break;
-        }
-
-        await iprot.ReadFieldEndAsync(cancellationToken);
+        return _statusCode;
       }
-
-      await iprot.ReadStructEndAsync(cancellationToken);
+      set
+      {
+        __isset.statusCode = true;
+        this._statusCode = value;
+      }
     }
-    finally
-    {
-      iprot.DecrementRecursionDepth();
-    }
-  }
 
-  public async global::System.Threading.Tasks.Task WriteAsync(TProtocol oprot, CancellationToken cancellationToken)
-  {
-    oprot.IncrementRecursionDepth();
-    try
+    public Dictionary<string, string> Headers
     {
-      var struc = new TStruct("Response");
-      await oprot.WriteStructBeginAsync(struc, cancellationToken);
-      var field = new TField();
+      get
+      {
+        return _headers;
+      }
+      set
+      {
+        __isset.headers = true;
+        this._headers = value;
+      }
+    }
+
+    public string Body
+    {
+      get
+      {
+        return _body;
+      }
+      set
+      {
+        __isset.body = true;
+        this._body = value;
+      }
+    }
+
+
+    public Isset __isset;
+    public struct Isset
+    {
+      public bool statusCode;
+      public bool headers;
+      public bool body;
+    }
+
+    public Response()
+    {
+    }
+
+    public Response DeepCopy()
+    {
+      var tmp58 = new Response();
       if(__isset.statusCode)
       {
-        field.Name = "statusCode";
-        field.Type = TType.I32;
-        field.ID = 1;
-        await oprot.WriteFieldBeginAsync(field, cancellationToken);
-        await oprot.WriteI32Async(StatusCode, cancellationToken);
-        await oprot.WriteFieldEndAsync(cancellationToken);
+        tmp58.StatusCode = this.StatusCode;
       }
+      tmp58.__isset.statusCode = this.__isset.statusCode;
       if((Headers != null) && __isset.headers)
       {
-        field.Name = "headers";
-        field.Type = TType.Map;
-        field.ID = 2;
-        await oprot.WriteFieldBeginAsync(field, cancellationToken);
+        tmp58.Headers = this.Headers.DeepCopy();
+      }
+      tmp58.__isset.headers = this.__isset.headers;
+      if((Body != null) && __isset.body)
+      {
+        tmp58.Body = this.Body;
+      }
+      tmp58.__isset.body = this.__isset.body;
+      return tmp58;
+    }
+
+    public async global::System.Threading.Tasks.Task ReadAsync(TProtocol iprot, CancellationToken cancellationToken)
+    {
+      iprot.IncrementRecursionDepth();
+      try
+      {
+        TField field;
+        await iprot.ReadStructBeginAsync(cancellationToken);
+        while (true)
         {
-          await oprot.WriteMapBeginAsync(new TMap(TType.String, TType.String, Headers.Count), cancellationToken);
-          foreach (string _iter63 in Headers.Keys)
+          field = await iprot.ReadFieldBeginAsync(cancellationToken);
+          if (field.Type == TType.Stop)
           {
-            await oprot.WriteStringAsync(_iter63, cancellationToken);
-            await oprot.WriteStringAsync(Headers[_iter63], cancellationToken);
+            break;
           }
-          await oprot.WriteMapEndAsync(cancellationToken);
+
+          switch (field.ID)
+          {
+            case 1:
+              if (field.Type == TType.I32)
+              {
+                StatusCode = await iprot.ReadI32Async(cancellationToken);
+              }
+              else
+              {
+                await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
+              }
+              break;
+            case 2:
+              if (field.Type == TType.Map)
+              {
+                {
+                  TMap _map59 = await iprot.ReadMapBeginAsync(cancellationToken);
+                  Headers = new Dictionary<string, string>(_map59.Count);
+                  for(int _i60 = 0; _i60 < _map59.Count; ++_i60)
+                  {
+                    string _key61;
+                    string _val62;
+                    _key61 = await iprot.ReadStringAsync(cancellationToken);
+                    _val62 = await iprot.ReadStringAsync(cancellationToken);
+                    Headers[_key61] = _val62;
+                  }
+                  await iprot.ReadMapEndAsync(cancellationToken);
+                }
+              }
+              else
+              {
+                await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
+              }
+              break;
+            case 3:
+              if (field.Type == TType.String)
+              {
+                Body = await iprot.ReadStringAsync(cancellationToken);
+              }
+              else
+              {
+                await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
+              }
+              break;
+            default: 
+              await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
+              break;
+          }
+
+          await iprot.ReadFieldEndAsync(cancellationToken);
         }
-        await oprot.WriteFieldEndAsync(cancellationToken);
+
+        await iprot.ReadStructEndAsync(cancellationToken);
       }
-      if((Body != null) && __isset.body)
+      finally
       {
-        field.Name = "body";
-        field.Type = TType.String;
-        field.ID = 3;
-        await oprot.WriteFieldBeginAsync(field, cancellationToken);
-        await oprot.WriteStringAsync(Body, cancellationToken);
-        await oprot.WriteFieldEndAsync(cancellationToken);
+        iprot.DecrementRecursionDepth();
       }
-      await oprot.WriteFieldStopAsync(cancellationToken);
-      await oprot.WriteStructEndAsync(cancellationToken);
     }
-    finally
+
+    public async global::System.Threading.Tasks.Task WriteAsync(TProtocol oprot, CancellationToken cancellationToken)
     {
-      oprot.DecrementRecursionDepth();
+      oprot.IncrementRecursionDepth();
+      try
+      {
+        var struc = new TStruct("Response");
+        await oprot.WriteStructBeginAsync(struc, cancellationToken);
+        var field = new TField();
+        if(__isset.statusCode)
+        {
+          field.Name = "statusCode";
+          field.Type = TType.I32;
+          field.ID = 1;
+          await oprot.WriteFieldBeginAsync(field, cancellationToken);
+          await oprot.WriteI32Async(StatusCode, cancellationToken);
+          await oprot.WriteFieldEndAsync(cancellationToken);
+        }
+        if((Headers != null) && __isset.headers)
+        {
+          field.Name = "headers";
+          field.Type = TType.Map;
+          field.ID = 2;
+          await oprot.WriteFieldBeginAsync(field, cancellationToken);
+          {
+            await oprot.WriteMapBeginAsync(new TMap(TType.String, TType.String, Headers.Count), cancellationToken);
+            foreach (string _iter63 in Headers.Keys)
+            {
+              await oprot.WriteStringAsync(_iter63, cancellationToken);
+              await oprot.WriteStringAsync(Headers[_iter63], cancellationToken);
+            }
+            await oprot.WriteMapEndAsync(cancellationToken);
+          }
+          await oprot.WriteFieldEndAsync(cancellationToken);
+        }
+        if((Body != null) && __isset.body)
+        {
+          field.Name = "body";
+          field.Type = TType.String;
+          field.ID = 3;
+          await oprot.WriteFieldBeginAsync(field, cancellationToken);
+          await oprot.WriteStringAsync(Body, cancellationToken);
+          await oprot.WriteFieldEndAsync(cancellationToken);
+        }
+        await oprot.WriteFieldStopAsync(cancellationToken);
+        await oprot.WriteStructEndAsync(cancellationToken);
+      }
+      finally
+      {
+        oprot.DecrementRecursionDepth();
+      }
     }
-  }
 
-  public override bool Equals(object that)
-  {
-    if (!(that is Response other)) return false;
-    if (ReferenceEquals(this, other)) return true;
-    return ((__isset.statusCode == other.__isset.statusCode) && ((!__isset.statusCode) || (System.Object.Equals(StatusCode, other.StatusCode))))
-      && ((__isset.headers == other.__isset.headers) && ((!__isset.headers) || (TCollections.Equals(Headers, other.Headers))))
-      && ((__isset.body == other.__isset.body) && ((!__isset.body) || (System.Object.Equals(Body, other.Body))));
-  }
+    public override bool Equals(object that)
+    {
+      if (!(that is Response other)) return false;
+      if (ReferenceEquals(this, other)) return true;
+      return ((__isset.statusCode == other.__isset.statusCode) && ((!__isset.statusCode) || (System.Object.Equals(StatusCode, other.StatusCode))))
+        && ((__isset.headers == other.__isset.headers) && ((!__isset.headers) || (TCollections.Equals(Headers, other.Headers))))
+        && ((__isset.body == other.__isset.body) && ((!__isset.body) || (System.Object.Equals(Body, other.Body))));
+    }
 
-  public override int GetHashCode() {
-    int hashcode = 157;
-    unchecked {
+    public override int GetHashCode() {
+      int hashcode = 157;
+      unchecked {
+        if(__isset.statusCode)
+        {
+          hashcode = (hashcode * 397) + StatusCode.GetHashCode();
+        }
+        if((Headers != null) && __isset.headers)
+        {
+          hashcode = (hashcode * 397) + TCollections.GetHashCode(Headers);
+        }
+        if((Body != null) && __isset.body)
+        {
+          hashcode = (hashcode * 397) + Body.GetHashCode();
+        }
+      }
+      return hashcode;
+    }
+
+    public override string ToString()
+    {
+      var sb = new StringBuilder("Response(");
+      int tmp64 = 0;
       if(__isset.statusCode)
       {
-        hashcode = (hashcode * 397) + StatusCode.GetHashCode();
+        if(0 < tmp64++) { sb.Append(", "); }
+        sb.Append("StatusCode: ");
+        StatusCode.ToString(sb);
       }
       if((Headers != null) && __isset.headers)
       {
-        hashcode = (hashcode * 397) + TCollections.GetHashCode(Headers);
+        if(0 < tmp64++) { sb.Append(", "); }
+        sb.Append("Headers: ");
+        Headers.ToString(sb);
       }
       if((Body != null) && __isset.body)
       {
-        hashcode = (hashcode * 397) + Body.GetHashCode();
+        if(0 < tmp64++) { sb.Append(", "); }
+        sb.Append("Body: ");
+        Body.ToString(sb);
       }
+      sb.Append(')');
+      return sb.ToString();
     }
-    return hashcode;
   }
 
-  public override string ToString()
-  {
-    var sb = new StringBuilder("Response(");
-    int tmp64 = 0;
-    if(__isset.statusCode)
-    {
-      if(0 < tmp64++) { sb.Append(", "); }
-      sb.Append("StatusCode: ");
-      StatusCode.ToString(sb);
-    }
-    if((Headers != null) && __isset.headers)
-    {
-      if(0 < tmp64++) { sb.Append(", "); }
-      sb.Append("Headers: ");
-      Headers.ToString(sb);
-    }
-    if((Body != null) && __isset.body)
-    {
-      if(0 < tmp64++) { sb.Append(", "); }
-      sb.Append("Body: ");
-      Body.ToString(sb);
-    }
-    sb.Append(')');
-    return sb.ToString();
-  }
 }
-

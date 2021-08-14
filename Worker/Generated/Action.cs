@@ -28,195 +28,198 @@ using Thrift.Processor;
 #pragma warning disable IDE0079  // remove unnecessary pragmas
 #pragma warning disable IDE1006  // parts of the code use IDL spelling
 
-
-public partial class Action : TBase
+namespace FusioWorker.Generated
 {
-  private string _name;
-  private string _code;
 
-  public string Name
+  public partial class Action : TBase
   {
-    get
-    {
-      return _name;
-    }
-    set
-    {
-      __isset.name = true;
-      this._name = value;
-    }
-  }
+    private string _name;
+    private string _code;
 
-  public string Code
-  {
-    get
+    public string Name
     {
-      return _code;
-    }
-    set
-    {
-      __isset.code = true;
-      this._code = value;
-    }
-  }
-
-
-  public Isset __isset;
-  public struct Isset
-  {
-    public bool name;
-    public bool code;
-  }
-
-  public Action()
-  {
-  }
-
-  public Action DeepCopy()
-  {
-    var tmp9 = new Action();
-    if((Name != null) && __isset.name)
-    {
-      tmp9.Name = this.Name;
-    }
-    tmp9.__isset.name = this.__isset.name;
-    if((Code != null) && __isset.code)
-    {
-      tmp9.Code = this.Code;
-    }
-    tmp9.__isset.code = this.__isset.code;
-    return tmp9;
-  }
-
-  public async global::System.Threading.Tasks.Task ReadAsync(TProtocol iprot, CancellationToken cancellationToken)
-  {
-    iprot.IncrementRecursionDepth();
-    try
-    {
-      TField field;
-      await iprot.ReadStructBeginAsync(cancellationToken);
-      while (true)
+      get
       {
-        field = await iprot.ReadFieldBeginAsync(cancellationToken);
-        if (field.Type == TType.Stop)
-        {
-          break;
-        }
-
-        switch (field.ID)
-        {
-          case 1:
-            if (field.Type == TType.String)
-            {
-              Name = await iprot.ReadStringAsync(cancellationToken);
-            }
-            else
-            {
-              await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
-            }
-            break;
-          case 2:
-            if (field.Type == TType.String)
-            {
-              Code = await iprot.ReadStringAsync(cancellationToken);
-            }
-            else
-            {
-              await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
-            }
-            break;
-          default: 
-            await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
-            break;
-        }
-
-        await iprot.ReadFieldEndAsync(cancellationToken);
+        return _name;
       }
-
-      await iprot.ReadStructEndAsync(cancellationToken);
+      set
+      {
+        __isset.name = true;
+        this._name = value;
+      }
     }
-    finally
-    {
-      iprot.DecrementRecursionDepth();
-    }
-  }
 
-  public async global::System.Threading.Tasks.Task WriteAsync(TProtocol oprot, CancellationToken cancellationToken)
-  {
-    oprot.IncrementRecursionDepth();
-    try
+    public string Code
     {
-      var struc = new TStruct("Action");
-      await oprot.WriteStructBeginAsync(struc, cancellationToken);
-      var field = new TField();
+      get
+      {
+        return _code;
+      }
+      set
+      {
+        __isset.code = true;
+        this._code = value;
+      }
+    }
+
+
+    public Isset __isset;
+    public struct Isset
+    {
+      public bool name;
+      public bool code;
+    }
+
+    public Action()
+    {
+    }
+
+    public Action DeepCopy()
+    {
+      var tmp9 = new Action();
       if((Name != null) && __isset.name)
       {
-        field.Name = "name";
-        field.Type = TType.String;
-        field.ID = 1;
-        await oprot.WriteFieldBeginAsync(field, cancellationToken);
-        await oprot.WriteStringAsync(Name, cancellationToken);
-        await oprot.WriteFieldEndAsync(cancellationToken);
+        tmp9.Name = this.Name;
+      }
+      tmp9.__isset.name = this.__isset.name;
+      if((Code != null) && __isset.code)
+      {
+        tmp9.Code = this.Code;
+      }
+      tmp9.__isset.code = this.__isset.code;
+      return tmp9;
+    }
+
+    public async global::System.Threading.Tasks.Task ReadAsync(TProtocol iprot, CancellationToken cancellationToken)
+    {
+      iprot.IncrementRecursionDepth();
+      try
+      {
+        TField field;
+        await iprot.ReadStructBeginAsync(cancellationToken);
+        while (true)
+        {
+          field = await iprot.ReadFieldBeginAsync(cancellationToken);
+          if (field.Type == TType.Stop)
+          {
+            break;
+          }
+
+          switch (field.ID)
+          {
+            case 1:
+              if (field.Type == TType.String)
+              {
+                Name = await iprot.ReadStringAsync(cancellationToken);
+              }
+              else
+              {
+                await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
+              }
+              break;
+            case 2:
+              if (field.Type == TType.String)
+              {
+                Code = await iprot.ReadStringAsync(cancellationToken);
+              }
+              else
+              {
+                await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
+              }
+              break;
+            default: 
+              await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
+              break;
+          }
+
+          await iprot.ReadFieldEndAsync(cancellationToken);
+        }
+
+        await iprot.ReadStructEndAsync(cancellationToken);
+      }
+      finally
+      {
+        iprot.DecrementRecursionDepth();
+      }
+    }
+
+    public async global::System.Threading.Tasks.Task WriteAsync(TProtocol oprot, CancellationToken cancellationToken)
+    {
+      oprot.IncrementRecursionDepth();
+      try
+      {
+        var struc = new TStruct("Action");
+        await oprot.WriteStructBeginAsync(struc, cancellationToken);
+        var field = new TField();
+        if((Name != null) && __isset.name)
+        {
+          field.Name = "name";
+          field.Type = TType.String;
+          field.ID = 1;
+          await oprot.WriteFieldBeginAsync(field, cancellationToken);
+          await oprot.WriteStringAsync(Name, cancellationToken);
+          await oprot.WriteFieldEndAsync(cancellationToken);
+        }
+        if((Code != null) && __isset.code)
+        {
+          field.Name = "code";
+          field.Type = TType.String;
+          field.ID = 2;
+          await oprot.WriteFieldBeginAsync(field, cancellationToken);
+          await oprot.WriteStringAsync(Code, cancellationToken);
+          await oprot.WriteFieldEndAsync(cancellationToken);
+        }
+        await oprot.WriteFieldStopAsync(cancellationToken);
+        await oprot.WriteStructEndAsync(cancellationToken);
+      }
+      finally
+      {
+        oprot.DecrementRecursionDepth();
+      }
+    }
+
+    public override bool Equals(object that)
+    {
+      if (!(that is Action other)) return false;
+      if (ReferenceEquals(this, other)) return true;
+      return ((__isset.name == other.__isset.name) && ((!__isset.name) || (System.Object.Equals(Name, other.Name))))
+        && ((__isset.code == other.__isset.code) && ((!__isset.code) || (System.Object.Equals(Code, other.Code))));
+    }
+
+    public override int GetHashCode() {
+      int hashcode = 157;
+      unchecked {
+        if((Name != null) && __isset.name)
+        {
+          hashcode = (hashcode * 397) + Name.GetHashCode();
+        }
+        if((Code != null) && __isset.code)
+        {
+          hashcode = (hashcode * 397) + Code.GetHashCode();
+        }
+      }
+      return hashcode;
+    }
+
+    public override string ToString()
+    {
+      var sb = new StringBuilder("Action(");
+      int tmp10 = 0;
+      if((Name != null) && __isset.name)
+      {
+        if(0 < tmp10++) { sb.Append(", "); }
+        sb.Append("Name: ");
+        Name.ToString(sb);
       }
       if((Code != null) && __isset.code)
       {
-        field.Name = "code";
-        field.Type = TType.String;
-        field.ID = 2;
-        await oprot.WriteFieldBeginAsync(field, cancellationToken);
-        await oprot.WriteStringAsync(Code, cancellationToken);
-        await oprot.WriteFieldEndAsync(cancellationToken);
+        if(0 < tmp10++) { sb.Append(", "); }
+        sb.Append("Code: ");
+        Code.ToString(sb);
       }
-      await oprot.WriteFieldStopAsync(cancellationToken);
-      await oprot.WriteStructEndAsync(cancellationToken);
-    }
-    finally
-    {
-      oprot.DecrementRecursionDepth();
+      sb.Append(')');
+      return sb.ToString();
     }
   }
 
-  public override bool Equals(object that)
-  {
-    if (!(that is Action other)) return false;
-    if (ReferenceEquals(this, other)) return true;
-    return ((__isset.name == other.__isset.name) && ((!__isset.name) || (System.Object.Equals(Name, other.Name))))
-      && ((__isset.code == other.__isset.code) && ((!__isset.code) || (System.Object.Equals(Code, other.Code))));
-  }
-
-  public override int GetHashCode() {
-    int hashcode = 157;
-    unchecked {
-      if((Name != null) && __isset.name)
-      {
-        hashcode = (hashcode * 397) + Name.GetHashCode();
-      }
-      if((Code != null) && __isset.code)
-      {
-        hashcode = (hashcode * 397) + Code.GetHashCode();
-      }
-    }
-    return hashcode;
-  }
-
-  public override string ToString()
-  {
-    var sb = new StringBuilder("Action(");
-    int tmp10 = 0;
-    if((Name != null) && __isset.name)
-    {
-      if(0 < tmp10++) { sb.Append(", "); }
-      sb.Append("Name: ");
-      Name.ToString(sb);
-    }
-    if((Code != null) && __isset.code)
-    {
-      if(0 < tmp10++) { sb.Append(", "); }
-      sb.Append("Code: ");
-      Code.ToString(sb);
-    }
-    sb.Append(')');
-    return sb.ToString();
-  }
 }
-

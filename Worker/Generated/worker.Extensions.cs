@@ -20,114 +20,117 @@ using Thrift.Collections;
 #pragma warning disable IDE0079  // remove unnecessary pragmas
 #pragma warning disable IDE1006  // parts of the code use IDL spelling
 
-public static class workerExtensions
+namespace FusioWorker.Generated
 {
-  public static bool Equals(this Dictionary<string, string> instance, object that)
+  public static class workerExtensions
   {
-    if (!(that is Dictionary<string, string> other)) return false;
-    if (ReferenceEquals(instance, other)) return true;
+    public static bool Equals(this Dictionary<string, string> instance, object that)
+    {
+      if (!(that is Dictionary<string, string> other)) return false;
+      if (ReferenceEquals(instance, other)) return true;
 
-    return TCollections.Equals(instance, other);
+      return TCollections.Equals(instance, other);
+    }
+
+
+    public static int GetHashCode(this Dictionary<string, string> instance)
+    {
+      return TCollections.GetHashCode(instance);
+    }
+
+
+    public static Dictionary<string, string> DeepCopy(this Dictionary<string, string> source)
+    {
+      if (source == null)
+        return null;
+
+      var tmp81 = new Dictionary<string, string>(source.Count);
+      foreach (var pair in source)
+        tmp81.Add((pair.Key != null) ? pair.Key : null, (pair.Value != null) ? pair.Value : null);
+      return tmp81;
+    }
+
+
+    public static bool Equals(this List<global::FusioWorker.Generated.@Event> instance, object that)
+    {
+      if (!(that is List<global::FusioWorker.Generated.@Event> other)) return false;
+      if (ReferenceEquals(instance, other)) return true;
+
+      return TCollections.Equals(instance, other);
+    }
+
+
+    public static int GetHashCode(this List<global::FusioWorker.Generated.@Event> instance)
+    {
+      return TCollections.GetHashCode(instance);
+    }
+
+
+    public static List<global::FusioWorker.Generated.@Event> DeepCopy(this List<global::FusioWorker.Generated.@Event> source)
+    {
+      if (source == null)
+        return null;
+
+      var tmp82 = new List<global::FusioWorker.Generated.@Event>(source.Count);
+      foreach (var elem in source)
+        tmp82.Add((elem != null) ? elem.DeepCopy() : null);
+      return tmp82;
+    }
+
+
+    public static bool Equals(this List<global::FusioWorker.Generated.Log> instance, object that)
+    {
+      if (!(that is List<global::FusioWorker.Generated.Log> other)) return false;
+      if (ReferenceEquals(instance, other)) return true;
+
+      return TCollections.Equals(instance, other);
+    }
+
+
+    public static int GetHashCode(this List<global::FusioWorker.Generated.Log> instance)
+    {
+      return TCollections.GetHashCode(instance);
+    }
+
+
+    public static List<global::FusioWorker.Generated.Log> DeepCopy(this List<global::FusioWorker.Generated.Log> source)
+    {
+      if (source == null)
+        return null;
+
+      var tmp83 = new List<global::FusioWorker.Generated.Log>(source.Count);
+      foreach (var elem in source)
+        tmp83.Add((elem != null) ? elem.DeepCopy() : null);
+      return tmp83;
+    }
+
+
+    public static bool Equals(this List<string> instance, object that)
+    {
+      if (!(that is List<string> other)) return false;
+      if (ReferenceEquals(instance, other)) return true;
+
+      return TCollections.Equals(instance, other);
+    }
+
+
+    public static int GetHashCode(this List<string> instance)
+    {
+      return TCollections.GetHashCode(instance);
+    }
+
+
+    public static List<string> DeepCopy(this List<string> source)
+    {
+      if (source == null)
+        return null;
+
+      var tmp84 = new List<string>(source.Count);
+      foreach (var elem in source)
+        tmp84.Add((elem != null) ? elem : null);
+      return tmp84;
+    }
+
+
   }
-
-
-  public static int GetHashCode(this Dictionary<string, string> instance)
-  {
-    return TCollections.GetHashCode(instance);
-  }
-
-
-  public static Dictionary<string, string> DeepCopy(this Dictionary<string, string> source)
-  {
-    if (source == null)
-      return null;
-
-    var tmp81 = new Dictionary<string, string>(source.Count);
-    foreach (var pair in source)
-      tmp81.Add((pair.Key != null) ? pair.Key : null, (pair.Value != null) ? pair.Value : null);
-    return tmp81;
-  }
-
-
-  public static bool Equals(this List<@Event> instance, object that)
-  {
-    if (!(that is List<@Event> other)) return false;
-    if (ReferenceEquals(instance, other)) return true;
-
-    return TCollections.Equals(instance, other);
-  }
-
-
-  public static int GetHashCode(this List<@Event> instance)
-  {
-    return TCollections.GetHashCode(instance);
-  }
-
-
-  public static List<@Event> DeepCopy(this List<@Event> source)
-  {
-    if (source == null)
-      return null;
-
-    var tmp82 = new List<@Event>(source.Count);
-    foreach (var elem in source)
-      tmp82.Add((elem != null) ? elem.DeepCopy() : null);
-    return tmp82;
-  }
-
-
-  public static bool Equals(this List<Log> instance, object that)
-  {
-    if (!(that is List<Log> other)) return false;
-    if (ReferenceEquals(instance, other)) return true;
-
-    return TCollections.Equals(instance, other);
-  }
-
-
-  public static int GetHashCode(this List<Log> instance)
-  {
-    return TCollections.GetHashCode(instance);
-  }
-
-
-  public static List<Log> DeepCopy(this List<Log> source)
-  {
-    if (source == null)
-      return null;
-
-    var tmp83 = new List<Log>(source.Count);
-    foreach (var elem in source)
-      tmp83.Add((elem != null) ? elem.DeepCopy() : null);
-    return tmp83;
-  }
-
-
-  public static bool Equals(this List<string> instance, object that)
-  {
-    if (!(that is List<string> other)) return false;
-    if (ReferenceEquals(instance, other)) return true;
-
-    return TCollections.Equals(instance, other);
-  }
-
-
-  public static int GetHashCode(this List<string> instance)
-  {
-    return TCollections.GetHashCode(instance);
-  }
-
-
-  public static List<string> DeepCopy(this List<string> source)
-  {
-    if (source == null)
-      return null;
-
-    var tmp84 = new List<string>(source.Count);
-    foreach (var elem in source)
-      tmp84.Add((elem != null) ? elem : null);
-    return tmp84;
-  }
-
-
 }

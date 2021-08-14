@@ -28,247 +28,250 @@ using Thrift.Processor;
 #pragma warning disable IDE0079  // remove unnecessary pragmas
 #pragma warning disable IDE1006  // parts of the code use IDL spelling
 
-
-public partial class Execute : TBase
+namespace FusioWorker.Generated
 {
-  private string _action;
-  private Request _request;
-  private Context _context;
 
-  public string Action
+  public partial class Execute : TBase
   {
-    get
-    {
-      return _action;
-    }
-    set
-    {
-      __isset.action = true;
-      this._action = value;
-    }
-  }
+    private string _action;
+    private global::FusioWorker.Generated.Request _request;
+    private global::FusioWorker.Generated.Context _context;
 
-  public Request Request
-  {
-    get
+    public string Action
     {
-      return _request;
-    }
-    set
-    {
-      __isset.request = true;
-      this._request = value;
-    }
-  }
-
-  public Context Context
-  {
-    get
-    {
-      return _context;
-    }
-    set
-    {
-      __isset.context = true;
-      this._context = value;
-    }
-  }
-
-
-  public Isset __isset;
-  public struct Isset
-  {
-    public bool action;
-    public bool request;
-    public bool context;
-  }
-
-  public Execute()
-  {
-  }
-
-  public Execute DeepCopy()
-  {
-    var tmp11 = new Execute();
-    if((Action != null) && __isset.action)
-    {
-      tmp11.Action = this.Action;
-    }
-    tmp11.__isset.action = this.__isset.action;
-    if((Request != null) && __isset.request)
-    {
-      tmp11.Request = (Request)this.Request.DeepCopy();
-    }
-    tmp11.__isset.request = this.__isset.request;
-    if((Context != null) && __isset.context)
-    {
-      tmp11.Context = (Context)this.Context.DeepCopy();
-    }
-    tmp11.__isset.context = this.__isset.context;
-    return tmp11;
-  }
-
-  public async global::System.Threading.Tasks.Task ReadAsync(TProtocol iprot, CancellationToken cancellationToken)
-  {
-    iprot.IncrementRecursionDepth();
-    try
-    {
-      TField field;
-      await iprot.ReadStructBeginAsync(cancellationToken);
-      while (true)
+      get
       {
-        field = await iprot.ReadFieldBeginAsync(cancellationToken);
-        if (field.Type == TType.Stop)
-        {
-          break;
-        }
-
-        switch (field.ID)
-        {
-          case 1:
-            if (field.Type == TType.String)
-            {
-              Action = await iprot.ReadStringAsync(cancellationToken);
-            }
-            else
-            {
-              await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
-            }
-            break;
-          case 2:
-            if (field.Type == TType.Struct)
-            {
-              Request = new Request();
-              await Request.ReadAsync(iprot, cancellationToken);
-            }
-            else
-            {
-              await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
-            }
-            break;
-          case 3:
-            if (field.Type == TType.Struct)
-            {
-              Context = new Context();
-              await Context.ReadAsync(iprot, cancellationToken);
-            }
-            else
-            {
-              await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
-            }
-            break;
-          default: 
-            await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
-            break;
-        }
-
-        await iprot.ReadFieldEndAsync(cancellationToken);
+        return _action;
       }
-
-      await iprot.ReadStructEndAsync(cancellationToken);
+      set
+      {
+        __isset.action = true;
+        this._action = value;
+      }
     }
-    finally
-    {
-      iprot.DecrementRecursionDepth();
-    }
-  }
 
-  public async global::System.Threading.Tasks.Task WriteAsync(TProtocol oprot, CancellationToken cancellationToken)
-  {
-    oprot.IncrementRecursionDepth();
-    try
+    public global::FusioWorker.Generated.Request Request
     {
-      var struc = new TStruct("Execute");
-      await oprot.WriteStructBeginAsync(struc, cancellationToken);
-      var field = new TField();
+      get
+      {
+        return _request;
+      }
+      set
+      {
+        __isset.request = true;
+        this._request = value;
+      }
+    }
+
+    public global::FusioWorker.Generated.Context Context
+    {
+      get
+      {
+        return _context;
+      }
+      set
+      {
+        __isset.context = true;
+        this._context = value;
+      }
+    }
+
+
+    public Isset __isset;
+    public struct Isset
+    {
+      public bool action;
+      public bool request;
+      public bool context;
+    }
+
+    public Execute()
+    {
+    }
+
+    public Execute DeepCopy()
+    {
+      var tmp11 = new Execute();
       if((Action != null) && __isset.action)
       {
-        field.Name = "action";
-        field.Type = TType.String;
-        field.ID = 1;
-        await oprot.WriteFieldBeginAsync(field, cancellationToken);
-        await oprot.WriteStringAsync(Action, cancellationToken);
-        await oprot.WriteFieldEndAsync(cancellationToken);
+        tmp11.Action = this.Action;
+      }
+      tmp11.__isset.action = this.__isset.action;
+      if((Request != null) && __isset.request)
+      {
+        tmp11.Request = (global::FusioWorker.Generated.Request)this.Request.DeepCopy();
+      }
+      tmp11.__isset.request = this.__isset.request;
+      if((Context != null) && __isset.context)
+      {
+        tmp11.Context = (global::FusioWorker.Generated.Context)this.Context.DeepCopy();
+      }
+      tmp11.__isset.context = this.__isset.context;
+      return tmp11;
+    }
+
+    public async global::System.Threading.Tasks.Task ReadAsync(TProtocol iprot, CancellationToken cancellationToken)
+    {
+      iprot.IncrementRecursionDepth();
+      try
+      {
+        TField field;
+        await iprot.ReadStructBeginAsync(cancellationToken);
+        while (true)
+        {
+          field = await iprot.ReadFieldBeginAsync(cancellationToken);
+          if (field.Type == TType.Stop)
+          {
+            break;
+          }
+
+          switch (field.ID)
+          {
+            case 1:
+              if (field.Type == TType.String)
+              {
+                Action = await iprot.ReadStringAsync(cancellationToken);
+              }
+              else
+              {
+                await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
+              }
+              break;
+            case 2:
+              if (field.Type == TType.Struct)
+              {
+                Request = new global::FusioWorker.Generated.Request();
+                await Request.ReadAsync(iprot, cancellationToken);
+              }
+              else
+              {
+                await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
+              }
+              break;
+            case 3:
+              if (field.Type == TType.Struct)
+              {
+                Context = new global::FusioWorker.Generated.Context();
+                await Context.ReadAsync(iprot, cancellationToken);
+              }
+              else
+              {
+                await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
+              }
+              break;
+            default: 
+              await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
+              break;
+          }
+
+          await iprot.ReadFieldEndAsync(cancellationToken);
+        }
+
+        await iprot.ReadStructEndAsync(cancellationToken);
+      }
+      finally
+      {
+        iprot.DecrementRecursionDepth();
+      }
+    }
+
+    public async global::System.Threading.Tasks.Task WriteAsync(TProtocol oprot, CancellationToken cancellationToken)
+    {
+      oprot.IncrementRecursionDepth();
+      try
+      {
+        var struc = new TStruct("Execute");
+        await oprot.WriteStructBeginAsync(struc, cancellationToken);
+        var field = new TField();
+        if((Action != null) && __isset.action)
+        {
+          field.Name = "action";
+          field.Type = TType.String;
+          field.ID = 1;
+          await oprot.WriteFieldBeginAsync(field, cancellationToken);
+          await oprot.WriteStringAsync(Action, cancellationToken);
+          await oprot.WriteFieldEndAsync(cancellationToken);
+        }
+        if((Request != null) && __isset.request)
+        {
+          field.Name = "request";
+          field.Type = TType.Struct;
+          field.ID = 2;
+          await oprot.WriteFieldBeginAsync(field, cancellationToken);
+          await Request.WriteAsync(oprot, cancellationToken);
+          await oprot.WriteFieldEndAsync(cancellationToken);
+        }
+        if((Context != null) && __isset.context)
+        {
+          field.Name = "context";
+          field.Type = TType.Struct;
+          field.ID = 3;
+          await oprot.WriteFieldBeginAsync(field, cancellationToken);
+          await Context.WriteAsync(oprot, cancellationToken);
+          await oprot.WriteFieldEndAsync(cancellationToken);
+        }
+        await oprot.WriteFieldStopAsync(cancellationToken);
+        await oprot.WriteStructEndAsync(cancellationToken);
+      }
+      finally
+      {
+        oprot.DecrementRecursionDepth();
+      }
+    }
+
+    public override bool Equals(object that)
+    {
+      if (!(that is Execute other)) return false;
+      if (ReferenceEquals(this, other)) return true;
+      return ((__isset.action == other.__isset.action) && ((!__isset.action) || (System.Object.Equals(Action, other.Action))))
+        && ((__isset.request == other.__isset.request) && ((!__isset.request) || (System.Object.Equals(Request, other.Request))))
+        && ((__isset.context == other.__isset.context) && ((!__isset.context) || (System.Object.Equals(Context, other.Context))));
+    }
+
+    public override int GetHashCode() {
+      int hashcode = 157;
+      unchecked {
+        if((Action != null) && __isset.action)
+        {
+          hashcode = (hashcode * 397) + Action.GetHashCode();
+        }
+        if((Request != null) && __isset.request)
+        {
+          hashcode = (hashcode * 397) + Request.GetHashCode();
+        }
+        if((Context != null) && __isset.context)
+        {
+          hashcode = (hashcode * 397) + Context.GetHashCode();
+        }
+      }
+      return hashcode;
+    }
+
+    public override string ToString()
+    {
+      var sb = new StringBuilder("Execute(");
+      int tmp12 = 0;
+      if((Action != null) && __isset.action)
+      {
+        if(0 < tmp12++) { sb.Append(", "); }
+        sb.Append("Action: ");
+        Action.ToString(sb);
       }
       if((Request != null) && __isset.request)
       {
-        field.Name = "request";
-        field.Type = TType.Struct;
-        field.ID = 2;
-        await oprot.WriteFieldBeginAsync(field, cancellationToken);
-        await Request.WriteAsync(oprot, cancellationToken);
-        await oprot.WriteFieldEndAsync(cancellationToken);
+        if(0 < tmp12++) { sb.Append(", "); }
+        sb.Append("Request: ");
+        Request.ToString(sb);
       }
       if((Context != null) && __isset.context)
       {
-        field.Name = "context";
-        field.Type = TType.Struct;
-        field.ID = 3;
-        await oprot.WriteFieldBeginAsync(field, cancellationToken);
-        await Context.WriteAsync(oprot, cancellationToken);
-        await oprot.WriteFieldEndAsync(cancellationToken);
+        if(0 < tmp12++) { sb.Append(", "); }
+        sb.Append("Context: ");
+        Context.ToString(sb);
       }
-      await oprot.WriteFieldStopAsync(cancellationToken);
-      await oprot.WriteStructEndAsync(cancellationToken);
-    }
-    finally
-    {
-      oprot.DecrementRecursionDepth();
+      sb.Append(')');
+      return sb.ToString();
     }
   }
 
-  public override bool Equals(object that)
-  {
-    if (!(that is Execute other)) return false;
-    if (ReferenceEquals(this, other)) return true;
-    return ((__isset.action == other.__isset.action) && ((!__isset.action) || (System.Object.Equals(Action, other.Action))))
-      && ((__isset.request == other.__isset.request) && ((!__isset.request) || (System.Object.Equals(Request, other.Request))))
-      && ((__isset.context == other.__isset.context) && ((!__isset.context) || (System.Object.Equals(Context, other.Context))));
-  }
-
-  public override int GetHashCode() {
-    int hashcode = 157;
-    unchecked {
-      if((Action != null) && __isset.action)
-      {
-        hashcode = (hashcode * 397) + Action.GetHashCode();
-      }
-      if((Request != null) && __isset.request)
-      {
-        hashcode = (hashcode * 397) + Request.GetHashCode();
-      }
-      if((Context != null) && __isset.context)
-      {
-        hashcode = (hashcode * 397) + Context.GetHashCode();
-      }
-    }
-    return hashcode;
-  }
-
-  public override string ToString()
-  {
-    var sb = new StringBuilder("Execute(");
-    int tmp12 = 0;
-    if((Action != null) && __isset.action)
-    {
-      if(0 < tmp12++) { sb.Append(", "); }
-      sb.Append("Action: ");
-      Action.ToString(sb);
-    }
-    if((Request != null) && __isset.request)
-    {
-      if(0 < tmp12++) { sb.Append(", "); }
-      sb.Append("Request: ");
-      Request.ToString(sb);
-    }
-    if((Context != null) && __isset.context)
-    {
-      if(0 < tmp12++) { sb.Append(", "); }
-      sb.Append("Context: ");
-      Context.ToString(sb);
-    }
-    sb.Append(')');
-    return sb.ToString();
-  }
 }
-

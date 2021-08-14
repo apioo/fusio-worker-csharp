@@ -28,145 +28,148 @@ using Thrift.Processor;
 #pragma warning disable IDE0079  // remove unnecessary pragmas
 #pragma warning disable IDE1006  // parts of the code use IDL spelling
 
-
-public partial class RpcRequest : TBase
+namespace FusioWorker.Generated
 {
-  private string _arguments;
 
-  public string Arguments
+  public partial class RpcRequest : TBase
   {
-    get
+    private string _arguments;
+
+    public string Arguments
     {
-      return _arguments;
-    }
-    set
-    {
-      __isset.arguments = true;
-      this._arguments = value;
-    }
-  }
-
-
-  public Isset __isset;
-  public struct Isset
-  {
-    public bool arguments;
-  }
-
-  public RpcRequest()
-  {
-  }
-
-  public RpcRequest DeepCopy()
-  {
-    var tmp32 = new RpcRequest();
-    if((Arguments != null) && __isset.arguments)
-    {
-      tmp32.Arguments = this.Arguments;
-    }
-    tmp32.__isset.arguments = this.__isset.arguments;
-    return tmp32;
-  }
-
-  public async global::System.Threading.Tasks.Task ReadAsync(TProtocol iprot, CancellationToken cancellationToken)
-  {
-    iprot.IncrementRecursionDepth();
-    try
-    {
-      TField field;
-      await iprot.ReadStructBeginAsync(cancellationToken);
-      while (true)
+      get
       {
-        field = await iprot.ReadFieldBeginAsync(cancellationToken);
-        if (field.Type == TType.Stop)
-        {
-          break;
-        }
+        return _arguments;
+      }
+      set
+      {
+        __isset.arguments = true;
+        this._arguments = value;
+      }
+    }
 
-        switch (field.ID)
+
+    public Isset __isset;
+    public struct Isset
+    {
+      public bool arguments;
+    }
+
+    public RpcRequest()
+    {
+    }
+
+    public RpcRequest DeepCopy()
+    {
+      var tmp32 = new RpcRequest();
+      if((Arguments != null) && __isset.arguments)
+      {
+        tmp32.Arguments = this.Arguments;
+      }
+      tmp32.__isset.arguments = this.__isset.arguments;
+      return tmp32;
+    }
+
+    public async global::System.Threading.Tasks.Task ReadAsync(TProtocol iprot, CancellationToken cancellationToken)
+    {
+      iprot.IncrementRecursionDepth();
+      try
+      {
+        TField field;
+        await iprot.ReadStructBeginAsync(cancellationToken);
+        while (true)
         {
-          case 1:
-            if (field.Type == TType.String)
-            {
-              Arguments = await iprot.ReadStringAsync(cancellationToken);
-            }
-            else
-            {
+          field = await iprot.ReadFieldBeginAsync(cancellationToken);
+          if (field.Type == TType.Stop)
+          {
+            break;
+          }
+
+          switch (field.ID)
+          {
+            case 1:
+              if (field.Type == TType.String)
+              {
+                Arguments = await iprot.ReadStringAsync(cancellationToken);
+              }
+              else
+              {
+                await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
+              }
+              break;
+            default: 
               await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
-            }
-            break;
-          default: 
-            await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
-            break;
+              break;
+          }
+
+          await iprot.ReadFieldEndAsync(cancellationToken);
         }
 
-        await iprot.ReadFieldEndAsync(cancellationToken);
+        await iprot.ReadStructEndAsync(cancellationToken);
       }
-
-      await iprot.ReadStructEndAsync(cancellationToken);
+      finally
+      {
+        iprot.DecrementRecursionDepth();
+      }
     }
-    finally
-    {
-      iprot.DecrementRecursionDepth();
-    }
-  }
 
-  public async global::System.Threading.Tasks.Task WriteAsync(TProtocol oprot, CancellationToken cancellationToken)
-  {
-    oprot.IncrementRecursionDepth();
-    try
+    public async global::System.Threading.Tasks.Task WriteAsync(TProtocol oprot, CancellationToken cancellationToken)
     {
-      var struc = new TStruct("RpcRequest");
-      await oprot.WriteStructBeginAsync(struc, cancellationToken);
-      var field = new TField();
+      oprot.IncrementRecursionDepth();
+      try
+      {
+        var struc = new TStruct("RpcRequest");
+        await oprot.WriteStructBeginAsync(struc, cancellationToken);
+        var field = new TField();
+        if((Arguments != null) && __isset.arguments)
+        {
+          field.Name = "arguments";
+          field.Type = TType.String;
+          field.ID = 1;
+          await oprot.WriteFieldBeginAsync(field, cancellationToken);
+          await oprot.WriteStringAsync(Arguments, cancellationToken);
+          await oprot.WriteFieldEndAsync(cancellationToken);
+        }
+        await oprot.WriteFieldStopAsync(cancellationToken);
+        await oprot.WriteStructEndAsync(cancellationToken);
+      }
+      finally
+      {
+        oprot.DecrementRecursionDepth();
+      }
+    }
+
+    public override bool Equals(object that)
+    {
+      if (!(that is RpcRequest other)) return false;
+      if (ReferenceEquals(this, other)) return true;
+      return ((__isset.arguments == other.__isset.arguments) && ((!__isset.arguments) || (System.Object.Equals(Arguments, other.Arguments))));
+    }
+
+    public override int GetHashCode() {
+      int hashcode = 157;
+      unchecked {
+        if((Arguments != null) && __isset.arguments)
+        {
+          hashcode = (hashcode * 397) + Arguments.GetHashCode();
+        }
+      }
+      return hashcode;
+    }
+
+    public override string ToString()
+    {
+      var sb = new StringBuilder("RpcRequest(");
+      int tmp33 = 0;
       if((Arguments != null) && __isset.arguments)
       {
-        field.Name = "arguments";
-        field.Type = TType.String;
-        field.ID = 1;
-        await oprot.WriteFieldBeginAsync(field, cancellationToken);
-        await oprot.WriteStringAsync(Arguments, cancellationToken);
-        await oprot.WriteFieldEndAsync(cancellationToken);
+        if(0 < tmp33++) { sb.Append(", "); }
+        sb.Append("Arguments: ");
+        Arguments.ToString(sb);
       }
-      await oprot.WriteFieldStopAsync(cancellationToken);
-      await oprot.WriteStructEndAsync(cancellationToken);
-    }
-    finally
-    {
-      oprot.DecrementRecursionDepth();
+      sb.Append(')');
+      return sb.ToString();
     }
   }
 
-  public override bool Equals(object that)
-  {
-    if (!(that is RpcRequest other)) return false;
-    if (ReferenceEquals(this, other)) return true;
-    return ((__isset.arguments == other.__isset.arguments) && ((!__isset.arguments) || (System.Object.Equals(Arguments, other.Arguments))));
-  }
-
-  public override int GetHashCode() {
-    int hashcode = 157;
-    unchecked {
-      if((Arguments != null) && __isset.arguments)
-      {
-        hashcode = (hashcode * 397) + Arguments.GetHashCode();
-      }
-    }
-    return hashcode;
-  }
-
-  public override string ToString()
-  {
-    var sb = new StringBuilder("RpcRequest(");
-    int tmp33 = 0;
-    if((Arguments != null) && __isset.arguments)
-    {
-      if(0 < tmp33++) { sb.Append(", "); }
-      sb.Append("Arguments: ");
-      Arguments.ToString(sb);
-    }
-    sb.Append(')');
-    return sb.ToString();
-  }
 }
-

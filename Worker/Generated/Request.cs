@@ -28,197 +28,200 @@ using Thrift.Processor;
 #pragma warning disable IDE0079  // remove unnecessary pragmas
 #pragma warning disable IDE1006  // parts of the code use IDL spelling
 
-
-public partial class Request : TBase
+namespace FusioWorker.Generated
 {
-  private HttpRequest _http;
-  private RpcRequest _rpc;
 
-  public HttpRequest Http
+  public partial class Request : TBase
   {
-    get
-    {
-      return _http;
-    }
-    set
-    {
-      __isset.http = true;
-      this._http = value;
-    }
-  }
+    private global::FusioWorker.Generated.HttpRequest _http;
+    private global::FusioWorker.Generated.RpcRequest _rpc;
 
-  public RpcRequest Rpc
-  {
-    get
+    public global::FusioWorker.Generated.HttpRequest Http
     {
-      return _rpc;
-    }
-    set
-    {
-      __isset.rpc = true;
-      this._rpc = value;
-    }
-  }
-
-
-  public Isset __isset;
-  public struct Isset
-  {
-    public bool http;
-    public bool rpc;
-  }
-
-  public Request()
-  {
-  }
-
-  public Request DeepCopy()
-  {
-    var tmp13 = new Request();
-    if((Http != null) && __isset.http)
-    {
-      tmp13.Http = (HttpRequest)this.Http.DeepCopy();
-    }
-    tmp13.__isset.http = this.__isset.http;
-    if((Rpc != null) && __isset.rpc)
-    {
-      tmp13.Rpc = (RpcRequest)this.Rpc.DeepCopy();
-    }
-    tmp13.__isset.rpc = this.__isset.rpc;
-    return tmp13;
-  }
-
-  public async global::System.Threading.Tasks.Task ReadAsync(TProtocol iprot, CancellationToken cancellationToken)
-  {
-    iprot.IncrementRecursionDepth();
-    try
-    {
-      TField field;
-      await iprot.ReadStructBeginAsync(cancellationToken);
-      while (true)
+      get
       {
-        field = await iprot.ReadFieldBeginAsync(cancellationToken);
-        if (field.Type == TType.Stop)
-        {
-          break;
-        }
-
-        switch (field.ID)
-        {
-          case 1:
-            if (field.Type == TType.Struct)
-            {
-              Http = new HttpRequest();
-              await Http.ReadAsync(iprot, cancellationToken);
-            }
-            else
-            {
-              await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
-            }
-            break;
-          case 2:
-            if (field.Type == TType.Struct)
-            {
-              Rpc = new RpcRequest();
-              await Rpc.ReadAsync(iprot, cancellationToken);
-            }
-            else
-            {
-              await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
-            }
-            break;
-          default: 
-            await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
-            break;
-        }
-
-        await iprot.ReadFieldEndAsync(cancellationToken);
+        return _http;
       }
-
-      await iprot.ReadStructEndAsync(cancellationToken);
+      set
+      {
+        __isset.http = true;
+        this._http = value;
+      }
     }
-    finally
-    {
-      iprot.DecrementRecursionDepth();
-    }
-  }
 
-  public async global::System.Threading.Tasks.Task WriteAsync(TProtocol oprot, CancellationToken cancellationToken)
-  {
-    oprot.IncrementRecursionDepth();
-    try
+    public global::FusioWorker.Generated.RpcRequest Rpc
     {
-      var struc = new TStruct("Request");
-      await oprot.WriteStructBeginAsync(struc, cancellationToken);
-      var field = new TField();
+      get
+      {
+        return _rpc;
+      }
+      set
+      {
+        __isset.rpc = true;
+        this._rpc = value;
+      }
+    }
+
+
+    public Isset __isset;
+    public struct Isset
+    {
+      public bool http;
+      public bool rpc;
+    }
+
+    public Request()
+    {
+    }
+
+    public Request DeepCopy()
+    {
+      var tmp13 = new Request();
       if((Http != null) && __isset.http)
       {
-        field.Name = "http";
-        field.Type = TType.Struct;
-        field.ID = 1;
-        await oprot.WriteFieldBeginAsync(field, cancellationToken);
-        await Http.WriteAsync(oprot, cancellationToken);
-        await oprot.WriteFieldEndAsync(cancellationToken);
+        tmp13.Http = (global::FusioWorker.Generated.HttpRequest)this.Http.DeepCopy();
+      }
+      tmp13.__isset.http = this.__isset.http;
+      if((Rpc != null) && __isset.rpc)
+      {
+        tmp13.Rpc = (global::FusioWorker.Generated.RpcRequest)this.Rpc.DeepCopy();
+      }
+      tmp13.__isset.rpc = this.__isset.rpc;
+      return tmp13;
+    }
+
+    public async global::System.Threading.Tasks.Task ReadAsync(TProtocol iprot, CancellationToken cancellationToken)
+    {
+      iprot.IncrementRecursionDepth();
+      try
+      {
+        TField field;
+        await iprot.ReadStructBeginAsync(cancellationToken);
+        while (true)
+        {
+          field = await iprot.ReadFieldBeginAsync(cancellationToken);
+          if (field.Type == TType.Stop)
+          {
+            break;
+          }
+
+          switch (field.ID)
+          {
+            case 1:
+              if (field.Type == TType.Struct)
+              {
+                Http = new global::FusioWorker.Generated.HttpRequest();
+                await Http.ReadAsync(iprot, cancellationToken);
+              }
+              else
+              {
+                await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
+              }
+              break;
+            case 2:
+              if (field.Type == TType.Struct)
+              {
+                Rpc = new global::FusioWorker.Generated.RpcRequest();
+                await Rpc.ReadAsync(iprot, cancellationToken);
+              }
+              else
+              {
+                await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
+              }
+              break;
+            default: 
+              await TProtocolUtil.SkipAsync(iprot, field.Type, cancellationToken);
+              break;
+          }
+
+          await iprot.ReadFieldEndAsync(cancellationToken);
+        }
+
+        await iprot.ReadStructEndAsync(cancellationToken);
+      }
+      finally
+      {
+        iprot.DecrementRecursionDepth();
+      }
+    }
+
+    public async global::System.Threading.Tasks.Task WriteAsync(TProtocol oprot, CancellationToken cancellationToken)
+    {
+      oprot.IncrementRecursionDepth();
+      try
+      {
+        var struc = new TStruct("Request");
+        await oprot.WriteStructBeginAsync(struc, cancellationToken);
+        var field = new TField();
+        if((Http != null) && __isset.http)
+        {
+          field.Name = "http";
+          field.Type = TType.Struct;
+          field.ID = 1;
+          await oprot.WriteFieldBeginAsync(field, cancellationToken);
+          await Http.WriteAsync(oprot, cancellationToken);
+          await oprot.WriteFieldEndAsync(cancellationToken);
+        }
+        if((Rpc != null) && __isset.rpc)
+        {
+          field.Name = "rpc";
+          field.Type = TType.Struct;
+          field.ID = 2;
+          await oprot.WriteFieldBeginAsync(field, cancellationToken);
+          await Rpc.WriteAsync(oprot, cancellationToken);
+          await oprot.WriteFieldEndAsync(cancellationToken);
+        }
+        await oprot.WriteFieldStopAsync(cancellationToken);
+        await oprot.WriteStructEndAsync(cancellationToken);
+      }
+      finally
+      {
+        oprot.DecrementRecursionDepth();
+      }
+    }
+
+    public override bool Equals(object that)
+    {
+      if (!(that is Request other)) return false;
+      if (ReferenceEquals(this, other)) return true;
+      return ((__isset.http == other.__isset.http) && ((!__isset.http) || (System.Object.Equals(Http, other.Http))))
+        && ((__isset.rpc == other.__isset.rpc) && ((!__isset.rpc) || (System.Object.Equals(Rpc, other.Rpc))));
+    }
+
+    public override int GetHashCode() {
+      int hashcode = 157;
+      unchecked {
+        if((Http != null) && __isset.http)
+        {
+          hashcode = (hashcode * 397) + Http.GetHashCode();
+        }
+        if((Rpc != null) && __isset.rpc)
+        {
+          hashcode = (hashcode * 397) + Rpc.GetHashCode();
+        }
+      }
+      return hashcode;
+    }
+
+    public override string ToString()
+    {
+      var sb = new StringBuilder("Request(");
+      int tmp14 = 0;
+      if((Http != null) && __isset.http)
+      {
+        if(0 < tmp14++) { sb.Append(", "); }
+        sb.Append("Http: ");
+        Http.ToString(sb);
       }
       if((Rpc != null) && __isset.rpc)
       {
-        field.Name = "rpc";
-        field.Type = TType.Struct;
-        field.ID = 2;
-        await oprot.WriteFieldBeginAsync(field, cancellationToken);
-        await Rpc.WriteAsync(oprot, cancellationToken);
-        await oprot.WriteFieldEndAsync(cancellationToken);
+        if(0 < tmp14++) { sb.Append(", "); }
+        sb.Append("Rpc: ");
+        Rpc.ToString(sb);
       }
-      await oprot.WriteFieldStopAsync(cancellationToken);
-      await oprot.WriteStructEndAsync(cancellationToken);
-    }
-    finally
-    {
-      oprot.DecrementRecursionDepth();
+      sb.Append(')');
+      return sb.ToString();
     }
   }
 
-  public override bool Equals(object that)
-  {
-    if (!(that is Request other)) return false;
-    if (ReferenceEquals(this, other)) return true;
-    return ((__isset.http == other.__isset.http) && ((!__isset.http) || (System.Object.Equals(Http, other.Http))))
-      && ((__isset.rpc == other.__isset.rpc) && ((!__isset.rpc) || (System.Object.Equals(Rpc, other.Rpc))));
-  }
-
-  public override int GetHashCode() {
-    int hashcode = 157;
-    unchecked {
-      if((Http != null) && __isset.http)
-      {
-        hashcode = (hashcode * 397) + Http.GetHashCode();
-      }
-      if((Rpc != null) && __isset.rpc)
-      {
-        hashcode = (hashcode * 397) + Rpc.GetHashCode();
-      }
-    }
-    return hashcode;
-  }
-
-  public override string ToString()
-  {
-    var sb = new StringBuilder("Request(");
-    int tmp14 = 0;
-    if((Http != null) && __isset.http)
-    {
-      if(0 < tmp14++) { sb.Append(", "); }
-      sb.Append("Http: ");
-      Http.ToString(sb);
-    }
-    if((Rpc != null) && __isset.rpc)
-    {
-      if(0 < tmp14++) { sb.Append(", "); }
-      sb.Append("Rpc: ");
-      Rpc.ToString(sb);
-    }
-    sb.Append(')');
-    return sb.ToString();
-  }
 }
-
