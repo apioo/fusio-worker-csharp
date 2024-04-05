@@ -1,0 +1,8 @@
+{
+  "type": "model-csharp",
+  "require": {
+    "fusio/worker": {
+      "target": "./generated"
+    }
+  }
+}
